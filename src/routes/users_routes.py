@@ -2,6 +2,7 @@ from uuid import  uuid1
 from flask import Blueprint, jsonify, request
 from models.UsersModel import UsersModel
 from database.db import get_connection
+from werkzeug.security import generate_password_hash, check_password_hash
 
 main = Blueprint('users_blueprint', __name__)
 
@@ -21,11 +22,13 @@ def create_user():
     email = new_user['email']
     password = new_user['password']
 
+    _hashed_password = generate_password_hash(password)
+
     conn = get_connection()
     cur= conn.cursor()
 
     userId = uuid1()
-    cur.execute('INSERT INTO users (id, name, surname, email, password) VALUES (%s,%s, %s, %s, %s) RETURNING *', (str(userId), name, surname, email, password))
+    cur.execute('INSERT INTO users (id, name, surname, email, password) VALUES (%s,%s, %s, %s, %s) RETURNING *', (str(userId), name, surname, email, _hashed_password))
 
     new_created_user = cur.fetchone()
     print(new_created_user)
