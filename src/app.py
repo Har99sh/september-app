@@ -1,7 +1,10 @@
 import imp
-from flask import Flask
+from unicodedata import name
+from flask import Flask, jsonify, request
 from config import config
 from routes import users_routes
+from database.db import get_connection
+from models.entities.users import Users
 
 app = Flask(__name__)
 
@@ -18,3 +21,6 @@ if __name__ == '__main__':
     app.register_error_handler(404, page_not_found)
     app.run()
 
+
+
+# @app.get('/users/<id>')
