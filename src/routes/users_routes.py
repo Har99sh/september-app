@@ -1,5 +1,5 @@
 from uuid import  uuid1
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, flash
 from models.UsersModel import UsersModel
 from database.db import get_connection
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -26,9 +26,16 @@ def create_user():
 
     conn = get_connection()
     cur= conn.cursor()
-
     userId = uuid1()
-    cur.execute('INSERT INTO users (id, name, surname, email, password) VALUES (%s,%s, %s, %s, %s) RETURNING *', (str(userId), name, surname, email, _hashed_password))
+
+    #Check if account exists 
+    cur.execute('SELECT * FROM users WHERE email = %s', (email,))
+    account = cur.fetchone()
+    print(account)
+    if account:
+        return jsonify("user email already exist")
+    else:
+        cur.execute('INSERT INTO users (id, name, surname, email, password) VALUES (%s,%s, %s, %s, %s) RETURNING *', (str(userId), name, surname, email, _hashed_password))
 
     new_created_user = cur.fetchone()
     print(new_created_user)
