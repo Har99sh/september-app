@@ -21,6 +21,10 @@ def create_user():
     surname = new_user['surname']
     email = new_user['email']
     password = new_user['password']
+    company_name = new_user['company_name']
+    company_id = new_user['company_id']
+    role = new_user['role']
+    dni = new_user['dni']
 
     _hashed_password = generate_password_hash(password)
 
@@ -29,13 +33,13 @@ def create_user():
     userId = uuid1()
 
     #Check if account exists 
-    cur.execute('SELECT * FROM users WHERE email = %s', (email,))
+    cur.execute('SELECT * FROM client_users WHERE email = %s', (email,))
     account = cur.fetchone()
     print(account)
     if account:
         return jsonify("user email already exist")
     else:
-        cur.execute('INSERT INTO users (id, name, surname, email, password) VALUES (%s,%s, %s, %s, %s) RETURNING *', (str(userId), name, surname, email, _hashed_password))
+        cur.execute('INSERT INTO client_users VALUES (%s,%s, %s, %s, %s,%s,%s, %s, %s) RETURNING *', (str(userId), name, surname, email, company_name, company_id, role, dni, _hashed_password))
 
     new_created_user = cur.fetchone()
     print(new_created_user)

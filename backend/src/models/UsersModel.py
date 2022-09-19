@@ -10,7 +10,7 @@ class UsersModel():
             users_array = []
 
             with connection.cursor() as cursor:
-                cursor.execute("SELECT id, name, surname, email, password FROM users ORDER BY name ASC")
+                cursor.execute("SELECT id, name, surname, email, password FROM client_users ORDER BY name ASC")
                 resultset = cursor.fetchall()
 
                 for row in resultset:
@@ -28,7 +28,7 @@ class UsersModel():
             connection = get_connection()
 
             with connection.cursor() as cursor:
-                cursor.execute("SELECT id, name, surname, email, password FROM users ORDER BY name ASC WHERE id = %s",(id,))
+                cursor.execute("SELECT id, name, surname, email, password FROM client_users ORDER BY name ASC WHERE id = %s",(id,))
                 row = cursor.fetchone()
 
                 one_user = None

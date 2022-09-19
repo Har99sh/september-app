@@ -1,11 +1,15 @@
 from unicodedata import name
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, make_response
 from config import config
 from routes import users_routes
 from database.db import get_connection
 from models.entities.users import Users
 
 app = Flask(__name__)
+
+@app.get('/')
+def homepage():
+    return make_response("hello")
 
 def page_not_found(error):
     return '<h1> Not found page </h1>'
