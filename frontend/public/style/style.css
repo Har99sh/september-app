@@ -1,0 +1,40 @@
+
+header {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    background-size: cover;
+    padding: 0px;
+    margin: 0px;
+    }
+    
+
+    .login {
+    border: 3px solid rgb(77, 87, 200);
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    width: 40%;
+    text-align: center;
+  
+
+}
+
+button{
+    color: rgb(30, 35, 108);
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    background-color: rgb(156, 205, 205);
+}
+
+
+    
+    
