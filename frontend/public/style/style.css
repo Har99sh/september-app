@@ -1,4 +1,3 @@
-
 header {
     width: 100%;
     height: 100px;
@@ -8,33 +7,48 @@ header {
     background-size: cover;
     padding: 0px;
     margin: 0px;
-    }
-    
+    background-color: #0b698b;
 
-    .login {
-    border: 3px solid rgb(77, 87, 200);
-    border-radius: 10px;
-    text-align: center;
+}
+
+.form-holder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    padding: 60px;
+    width: 100%;
+}
+
+.login {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 40px;
     width: 40%;
-    text-align: center;
-  
-
+    background-color: #0b698b;
+    font-size: 12px;
+}
+.login h2 {
+    color: #fff;
+    font-size: 15px;
+    margin-bottom: 9px;
+    
+}
+.sign {
+    background-color: #97cbdc;
+    align-items: center;
+    padding: 10px;
+    width: 45%;
+    font-size: 12px;
 }
 
-button{
+button {
     color: rgb(30, 35, 108);
-    text-align: center;
-    font-size: 12px;
-    font-weight: 700;
+    text-align: left;
+    font-size: 10px;
     margin-bottom: 8px;
     background-color: rgb(156, 205, 205);
+
 }
-
-
-    
-    
