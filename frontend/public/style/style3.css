@@ -54,3 +54,18 @@ a:link, a:visited, a:active {
     color: black;
 }
 */
+main {
+background-color: #D0DAE0;
+}
+.modal-header {
+    background-color: #0396A6;
+}
+
+.modal-content {
+background-color: #0B698B;
+}
+.log {
+    background-color: #9cd3db;
+    color: black;
+    
+}
