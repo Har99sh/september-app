@@ -1,0 +1,56 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ /*
+.navegacion {
+    background-color: green;
+    display: flex;
+    border: 1px solid black;
+    justify-content: space-between;
+}
+
+.logo {
+    background-color: violet;
+    border: 1px solid black;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.links {
+    background-color: pink;
+    border: 1px solid black;
+    margin: 20px;
+}
+
+.navLinks {
+    background-color: coral;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+}
+
+.liUno{
+    margin: 20px;
+    list-style: none;
+}
+
+
+.logoHeader {
+    height: 40px;
+    width: auto;
+    transition: all 0.5s;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid black;
+}
+
+a:link, a:visited, a:active {
+    text-decoration:none;
+    color: black;
+}
+*/
