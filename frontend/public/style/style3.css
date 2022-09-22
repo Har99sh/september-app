@@ -67,5 +67,11 @@ background-color: #0B698B;
 .log {
     background-color: #9cd3db;
     color: black;
-    
+    margin-top: 20px;    
+}
+.logcancel {
+    background-color: #9cd3db;
+    color: black;
+    margin-top: 20px;  
+    margin-left: 220px;  
 }
