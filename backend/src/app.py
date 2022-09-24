@@ -3,13 +3,22 @@ from flask import Flask, jsonify, request, make_response,  url_for, redirect, g,
 from flask_login import LoginManager, login_user, current_user, logout_user
 from config import config
 from Blueprints import users_routes
-from database.db import get_connection
 from models.users import Users
 from werkzeug.security import generate_password_hash, check_password_hash
 from uuid import  uuid1
+from repository.users_repository import UserRepository
 
 app = Flask(__name__)
 
+login_manager = LoginManager(app)
+
+@login_manager.user_loader
+def load_user(id):
+    user_repository = UserRepository()
+    user = user_repository.get(id)
+    if user is not None:
+        g.user = user
+    return 
 
 @app.get('/')
 def homepage():
@@ -30,53 +39,34 @@ def create_user():
     is_admin = new_user['is_admin']
 
     _hashed_password = generate_password_hash(password)
-
-    conn = get_connection()
-    cur= conn.cursor()
     userId = uuid1()
 
+    user_to_add = Users(str(userId), name, surname, email, _hashed_password, company_id, dni, is_admin)
+
     #Check if account exists 
-    cur.execute('SELECT * FROM users WHERE email = %s', (email,))
-    account = cur.fetchone()
-    print(account)
-    if account:
+    account_exist = UserRepository().get_by_email(email)
+    if account_exist:
         return jsonify("user email already exist")
     else:
-        cur.execute('INSERT INTO users VALUES (%s,%s,%s, %s, %s,%s,%s,%s) RETURNING *', (str(userId), name, surname, email, _hashed_password, company_id, dni, is_admin))
-
-    new_created_user = cur.fetchone()
-    print(new_created_user)
-    conn.commit()
-
-    cur.close()
-    conn.close()
-
-    return jsonify(new_created_user)
+        UserRepository().add(user_to_add)
+        return jsonify("user added correctly")
 
 @app.post('/login')
 def login():
-    login_user= request.get_json()
-    email = login_user['email']
-    password = login_user['password']
-
-    conn = get_connection()
-    cur= conn.cursor()
-    # Check if account exists using MySQL
-    cur.execute('SELECT * FROM users WHERE email = %s', (email,))
-    account = cur.fetchone()
+    user= request.get_json()
+    email = user['email']
+    password = user['password']
+    user_repository = UserRepository()
     
-    if account:
-            password_rs = account[4]
-            # If account exists in users table in out database
-            if check_password_hash(password_rs, password):
-                # Create session data, we can access this data in other routes
-                session['loggedin'] = True
-                session['id'] = account[0]
-                session['username'] = account[1]
-                print(session)
+    userFromDb = user_repository.get_by_email(email)
+    
+    if userFromDb:
+            passwordFromDb = userFromDb.password 
+            
+            if check_password_hash(passwordFromDb, password):
+                login_user(userFromDb, remember=True)
+                
                 return jsonify('you are logged in')
-                # Redirect to home page
-                # return redirect(url_for('home'))
             else:
                 # Account doesnt exist or username/password incorrect
                 print('Incorrect password')
@@ -89,13 +79,7 @@ def login():
 
 @app.route('/logout')
 def logout():
-    # Remove session data, this will log the user out
-    session.pop('loggedin', None)
-    session.pop('id', None)
-    session.pop('username', None)
-    print(session)
-    # Redirect to login page
-    #return redirect(url_for('login'))
+    logout_user()
     return make_response("user logged out")
 
 def page_not_found(error):
