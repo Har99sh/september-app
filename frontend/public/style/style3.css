@@ -58,19 +58,19 @@ main {
 background-color: #D0DAE0;
 }
 .modal-header {
-    background-color: #0396A6;
+    background-color: rgba(120, 166, 200, 1);
 }
 
 .modal-content {
-background-color: #0B698B;
+background-color: rgb(49, 103, 137, 1);
 }
 .log {
-    background-color: #9cd3db;
+    background-color: rgba(120, 166, 200, 1);
     color: black;
     margin-top: 20px;    
 }
 .logcancel {
-    background-color: #9cd3db;
+    background-color: rgba(120, 166, 200, 1);
     color: black;
     margin-top: 20px;  
     margin-left: 220px;  

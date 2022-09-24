@@ -16,24 +16,6 @@
 </head>
 
 <body>
-   <!--
-    <header class="principal">
-        <nav class="navegacion">
-            <div class="logo">
-                <img class="logoHeader" src="/frontend/public/images/Fondo.png" alt="logo">
-            </div>
-            <div class="links">
-                <ul class="navLinks">
-                    <li class="liUno"><a href="#">Login</a></li>
-                    <li class="liUno"><a href="#">Register</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-
--->
-
-
    <nav class="navbar navbar-expand-lg bg-light">
       <div class="container-fluid">
          <a class="navbar-brand" href="#">J4W</a>
@@ -54,49 +36,64 @@
       <div class="modal modal-signin position-static d-block py-5" tabindex="-1" role="dialog" id="modalSignin">
          <div class="modal-dialog" role="document">
             <div class="modal-content rounded-4 shadow">
-               <div class="modal-header p-5 pb-3 border-bottom-0">
+               <div class="modal-header p-3 pb-3 border-bottom-0">
                   <!-- <h5 class="modal-title">Modal title</h5> -->
-                  <h2 class="fw-bold mb-0">Register</h2>
+                  <p class="fw-bold mb-0 fs-5">Register</p>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                </div>
-
-               <div class="modal-body p-5 pt-2s">
+               <div class="modal-body p-4 pt-2s">
                   <form class="">
-                     <div class="form-floating mb-2">
-                        <input type="Name" class="form-control rounded-3" id="floatingInput">
+                     <div class="form-floating mb-3 ">
+                        <input type="Name" class="form-control rounded-10" id="floatingInput" placeholder="Name">
                         <label for="floatingInput">Name </label>
                      </div>
-                     <div class="form-floating mb-2">
-                        <input type="Lastname" class="form-control rounded-3" id="floatingInput">
+                     <div class="form-floating mb-3">
+                        <input type="Lastname" class="form-control rounded-3" id="floatingInput"
+                           placeholder="Last Name">
                         <label for="floatingInput">Last Name </label>
                      </div>
-                     <div class="form-floating mb-2">
+                     <div class="form-floating mb-3">
                         <input type="E-mail" class="form-control rounded-3" id="floatingInput"
                            placeholder="name@example.com">
                         <label for="floatingInput">E-mail </label>
                      </div>
-                     <div class="form-floating mb-2">
-                        <input type="Movile" class="form-control rounded-3" id="floatingInput">
+                     <div class="form-floating mb-3">
+                        <input type="Mobile" class="form-control rounded-3" id="floatingInput" placeholder="Mobile">
+
                         <label for="floatingInput">Movile </label>
                      </div>
-                     <div class="form-floating mb-2">
+                     <div class="form-floating mb-3">
                         <input type="password" class="form-control rounded-3" id="floatingPassword"
                            placeholder="Password">
                         <label for="floatingPassword">Password</label>
                      </div>
-                     <div class="form-floating mb-2">
+                     <div class="form-floating mb-3">
                         <input type="confirm-password" class="form-control rounded-3" id="floatingPassword"
                            placeholder="Password">
-                        <label for="floatingPassword">Confirm Password</label>
+                        <label for="floatingPassword">Confirm your Password</label>
                      </div>
-                     <div><button class="log  btn btn-lg rounded-3" type="submit"> Login</button>
-                        <button class="logcancel  btn btn-lg rounded-3" type="submit"> Cancel</button>
+                     <div class=" btn-toolbar d-flex justify-content-evenly">
+                        <button class="log  btn btn-lg rounded-3 btn-md" type="submit"> Login</button>
+                        <button class="logcancel  btn btn-lg rounded-3 btn-md" type="submit"> Cancel</button>
                      </div>
-
-
                   </form>
                </div>
             </div>
          </div>
       </div>
    </main>
+   <div class="container holitas">
+      <footer class="py-3 my-4">
+         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+         </ul>
+         <p class="text-center text-muted">© 2022 Company, Inc</p>
+      </footer>
+   </div>
+</body>
+
+</html>
