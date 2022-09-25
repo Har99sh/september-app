@@ -59,3 +59,66 @@ background-color: rgb(49, 103, 137, 1);
 }
 
 
+/* -------------Botones de Tarea----------------- */
+.botones {
+    background-color: rgba(49, 103, 137, 1);
+}
+
+
+.cajaBoton {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.cajaBotoncitos {
+    background-color: rgb(49, 103, 137, 1);
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+    margin: 10px, 10px, 50px;
+    color: white;
+    width: 200px;
+    margin: 10px 60px 10px 10px;
+}
+
+.cajaBotoncitos a {
+    margin: 7px 15px 7px 15px;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+}
+
+.cajaBotoncitos a:hover a:visited, a:link, a:active {
+    text-decoration: none;
+}
+
+/* ----------------Resposive-------------------- */
+
+@media screen and (max-width: 600px) {
+    .cajaBoton {
+        background-color: rgb(31, 10, 51);
+        border: solid black 1px;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .cajaBotoncitos {
+        background-color: rgb(49, 103, 137, 1);
+        border: solid black 1px;
+        display: flex;
+        justify-content: center;
+        border-radius: 5px;
+        font-size: 10px;
+        color: white;
+        margin: 10px;
+    }
+    
+    .cajaBotoncitos a {
+        margin-left: 20px;
+        margin-right: 20px;
+        text-decoration: none;
+        color: white;
+        text-align: center;
+    }
+}
