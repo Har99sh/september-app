@@ -55,8 +55,11 @@ Download postgres, run an instance on your machine
 
 in console
 
-    createdb db_just_4_work 
-    psql db_just_4_work < "COPY YOUR ROUTE TO THE FILE HERE"/september-app/pg_dump.sql
+    $createdb db_just_4_work 
+
+    $psql db_just_4_work < "COPY YOUR ROUTE TO THE FILE HERE"/september-app/pg_dump.sql
+
+    
 
 
 In the root of project, create .env file with the following variables
@@ -70,7 +73,11 @@ In the root of project, create .env file with the following variables
 
 <h3>Vue dependencies</h3>
 
+Enter your root project folder  (carpeta raíz del proyecto)
+
+
 in console 
 
     cd webapp/ 
     npm install 
+    npm run 

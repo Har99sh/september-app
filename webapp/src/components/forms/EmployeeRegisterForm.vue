@@ -12,12 +12,12 @@
                   <form class="">
                      <div class="form-floating mb-3 ">
                         <input type="Name" class="form-control rounded-10" id="floatingInput" placeholder="Name" v-model="name">
-                        <label for="floatingInput">Name </label>
+                        <label for="floatingInput">Name</label>
                      </div>
                      <div class="form-floating mb-3">
                         <input type="Lastname" class="form-control rounded-3" id="floatingInput"
                            placeholder="Last Name" v-model="surname">
-                        <label for="floatingInput">Last Name </label>
+                        <label for="floatingInput">Last Name</label>
                      </div>
                      <div class="form-floating mb-3">
                         <input type="text" class="form-control rounded-3" id="floatingInput" placeholder="DNI" v-model="dni">

@@ -74,4 +74,4 @@ class UserRepository:
             row['dni'],
             row['is_admin']    
         )
-        return user
+        return user.to_JSON()

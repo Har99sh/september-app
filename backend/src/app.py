@@ -7,9 +7,13 @@ from flask_cors import CORS
 from unicodedata import name
 from uuid import  uuid1
 
+#User modules
 from Blueprints.users_routes import users
 from models.users import Users
 from repository.users_repository import UserRepository
+
+#Task app
+from Blueprints.task_app import tasks
 
 from config import config
 
@@ -19,6 +23,7 @@ CORS(app)
 
 login_manager = LoginManager(app)
 
+app.register_blueprint(tasks)
 
 @login_manager.user_loader
 def load_user(id):
@@ -36,7 +41,7 @@ def homepage():
 @app.post('/register')
 def create_user():
     print("ejecutando regiter")
-    new_user= request.get_json()
+    new_user = request.get_json()
     print(new_user)
     name = new_user['name']
     surname = new_user['surname']
