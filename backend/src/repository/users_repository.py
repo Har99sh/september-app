@@ -44,7 +44,7 @@ class UserRepository:
 
     def add(self, user: Users):
         cursor = self._dbconection.cursor()
-        cursor.execute('insert into users values (%s, %s, %s, %s, %s, %s, %s, %s)',
+        cursor.execute('insert into users (id, name, surname, email, password, company_id, dni, is_admin) values (%s, %s, %s, %s, %s, %s, %s, %s)',
                        (
                            user.id,
                            user.name,

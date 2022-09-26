@@ -23,3 +23,14 @@ class Users(UserMixin):
             'dni' : self.dni,
             'is_admin' : self.is_admin 
         }
+    
+    def to_JSON_no_pass(self):
+        return{
+            'id': self.id,
+            'name': self.name,
+            'surname': self.surname,
+            'email': self.email,
+            'company_id' : self.company_id,
+            'dni' : self.dni,
+            'is_admin' : self.is_admin 
+        }

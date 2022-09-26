@@ -1,0 +1,66 @@
+<template lang="">
+<div>
+    <main>
+      <div class="modal modal-signin position-static d-block py-5" tabindex="-1" role="dialog" id="modalSignin">
+         <div class="modal-dialog" role="document">
+           <div class="modal-content rounded-4 shadow">
+             <div class="modal-header p-3 pb-3 border-bottom-0">
+               <!-- <h5 class="modal-title">Modal title</h5> -->
+               <p class="fw-bold mb-0 fs-5">Sign in to your account</p>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+             </div>
+             <div class="modal-body p-4 pt-2s">
+               <form class="">
+                 <div class="form-floating mb-3">
+                   <input type="Name" class="form-control rounded-10" id="floatingInput" placeholder="email" v-model="email">
+                   <label for="floatingInput">User</label>
+                 </div>
+                 <div class="form-floating mb-2">
+                     <input type="password" class="form-control rounded-10" id="floatingPassword" placeholder="Password" v-model="password">
+                     <label for="floatingPassword">Password</label>
+                   </div>
+                 <div class=" btn-toolbar d-flex justify-content-evenly">
+                     <button class="log  btn btn-lg rounded-3 btn-md" @click="authenticate">Login</button>
+                     <button class="logcancel btn btn-lg rounded-3 btn-md" type="submit"> Cancel</button>
+                 </div>
+               </form>
+             </div>
+           </div>
+         </div>
+     </div>
+    </main>
+  </div>
+</template>
+<script>
+import axios from 'axios';
+export default {
+    name: "LoginUser",
+    data() {
+      return {
+        user_login_data: {
+          email: "",
+          password: "",
+        }
+      }
+    },
+    methods: {
+      authenticate() {
+        const path = "http://127.0.0.1:5000/login";
+      axios
+        .post(path, {
+            email: this.email,
+            password: this.password
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      }
+    }
+}
+</script>
+<style lang="">
+    
+</style>
