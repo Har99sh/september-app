@@ -1,0 +1,53 @@
+$ docker images -a   /// see running images
+
+
+/////INSTRUCTIONS/////////
+
+These instructions for psql part are for macOS, you can try this if it works on windows or linux, if not search google for your corresponding OS.
+
+Download docker or Docker Desktop;
+
+https://www.docker.com/products/docker-desktop/
+
+run docker;
+
+
+<dockerFileUserName>  : adminUser
+password : docker
+
+
+open terminal
+
+inside root folder of project
+
+    $ docker build -t db_just_4_work ./    //build the db in docker
+
+    $ docker run -d --name postgres_container -p 5414:5432 db_just_4_work
+
+    $ docker exec -it postgres_container /bin/sh  //gets you inside docker container from terminal
+
+    $ su
+
+    $ psql -U <dockerFileUserName> db_just_4_work // this will get you inside the database as you would usually through a terminal, but inside docker
+
+
+
+
+To connect to docker database from outside:
+
+in another terminal:
+
+    $ psql -h localhost -p 5414 -U <dockerUserName> db_just_4_work  // this will give you the same db access from outside without being inside docker cli
+
+
+Configuration inside project 
+
+inside .env file create variable with value
+
+    PGSQL_PORT = 5414
+    
+    give the username and password variables the same value as the dockerFileUserName
+
+Continue as normal, this should be enough to dump the sql file with the db creation, run docker container and connect the project with database.
+
+
