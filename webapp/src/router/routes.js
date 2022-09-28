@@ -8,13 +8,18 @@ import CompanyRegisterForm from '../components/forms/CompanyRegisterForm.vue';
 import EmployeeRegisterForm from '../components/forms/EmployeeRegisterForm.vue';
 import LoginUser from '../components/forms/LoginUser.vue'
 
+/*Task app */
+import TaskList from '../components/task_app/TaskList.vue'
+import CreateTask from '../components/task_app/CreateTask.vue'
 
 const routes = [
+    /**Static pages routes */
     {
         path:'/',
         name:'LandingPage',
         component: LandingPage,
     },
+    /**User sign in/register routes */
     {
         path:'/register/company',
         name:'CompanyRegisterForm',
@@ -29,6 +34,17 @@ const routes = [
         path:'/login',
         name:'LoginUser',
         component: LoginUser,
+    },
+    /**Task app routes*/
+    {
+        path:'/tasks',
+        name:'TaskList',
+        component: TaskList,
+    },
+    {
+        path:'/tasks/create',
+        name:'CreateTask',
+        component: CreateTask,
     }
 ]
 

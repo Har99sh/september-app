@@ -1,9 +1,6 @@
 from models.task_app import Tasks
 from database.db import get_connection
-from psycopg2 import sql,extras
-from sqlite3 import Row
-
-
+from psycopg2 import extras
 
 class TasksRepository:
     
@@ -23,10 +20,11 @@ class TasksRepository:
         rows = cursor.fetchall()
         for row in rows:
             task_list.append(self.__compound_task(row))
-            cursor.close()
+        
+        cursor.close()
         
         if len(task_list) == 0 or None :
-            return "No tasks there :)"
+            return []
         
         return task_list
     
@@ -47,9 +45,15 @@ class TasksRepository:
         self.dbconnection.commit()
         cursor.close()
         
-    def update(self):
-        pass
-    
+    def update(self, type, id):
+        cursor = self.dbconnection.cursor()
+        if type == 'done':
+            cursor.execute('UPDATE task_app SET is_completed = True where id = %s;', (id))
+            self.dbconnection.commit()
+            cursor.close()
+        elif type == 'content':
+            pass
+        
     def delete(self, id):
         cursor = self.dbconnection.cursor()
         cursor.execute('delete from task_app where id = %s', (id,))

@@ -53,3 +53,11 @@ def create():
         return make_response("task is created", 200)
     except Exception as e:
         return make_response(e.__str__(), 400)
+    
+@tasks.put('/done/≤id>')
+def mark_as_done():
+    try:
+        task_repository.update('done', id)
+        return make_response('Task is done', 200)
+    except Exception as e:
+        return make_response(e.__str__(), 400)

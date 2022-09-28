@@ -70,6 +70,7 @@ In the root of project, create .env file with the following variables
     PGSQL_USER = 'your_user'
     PGSQL_PASSWORD = 'your_password'
     PGSQL_DATABASE  = 'db_just_4_work'
+    PGSQL_PORT = 5414   your port
 
 <h3>Vue dependencies</h3>
 
@@ -80,4 +81,4 @@ in console
 
     cd webapp/ 
     npm install 
-    npm run 
+    npm run serve

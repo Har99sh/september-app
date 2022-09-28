@@ -21,3 +21,6 @@ class Tasks():
             'due_date':self.due_date,
             'is_completed':self.is_completed
         }
+
+    def mark_as_done(self):
+        pass

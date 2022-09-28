@@ -1,4 +1,3 @@
-from sqlite3 import Row
 from models.users import Users
 from database.db import get_connection
 from psycopg2 import sql,extras
