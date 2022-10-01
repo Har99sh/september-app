@@ -83,6 +83,6 @@ in console
     npm install 
     npm run serve
 
-en caso de error OPENSSL_CONF (windows), hay que poner el siguiente comando en la terminal de venv y en la terminal de la webapp antes de hacer npm install : 
+en caso de error OPENSSL_CONF (windows), hay que poner el siguiente comando en la terminal de venv (activada) y en la terminal de la webapp antes de hacer npm install : 
 
     set OPENSSL_CONF=
