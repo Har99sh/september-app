@@ -103,8 +103,7 @@ def logout():
     return make_response("user logged out")
 
 #Company register
-@app.route('/register-company',methods=['POST'])
-@cross_origin(origins= '*', headers=['Content-Type'])
+@app.post('/register-company')
 def create_company():
     new_company = request.get_json()
     print(new_company)
