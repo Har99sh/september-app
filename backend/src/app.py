@@ -1,3 +1,4 @@
+import imp
 from flask import Flask, jsonify, request, make_response,  url_for, redirect, g, session
 from flask_login import LoginManager, login_user, current_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -14,6 +15,11 @@ from repository.users_repository import UserRepository
 
 #Task app
 from Blueprints.task_app import tasks
+
+#Company
+from Blueprints.company_blueprint import company
+from models.company import Company
+from repository.company_repository import CompanyRepository
 
 from config import config
 
@@ -93,6 +99,29 @@ def login():
 def logout():
     logout_user()
     return make_response("user logged out")
+
+#Company register
+@app.post('/register-company')
+def create_company():
+    new_company = request.get_json()
+    print(new_company)
+    name = new_company['name']
+    cif = new_company['cif']
+    email = new_company['email']
+    telephone = new_company['telephone']
+    
+    companyId = uuid1()
+
+    company_to_add = Company(str(companyId), name, cif, email, telephone)
+    #Check if account exists 
+    account_exist = CompanyRepository().get_by_email(email)
+    print(account_exist)
+    if account_exist:
+        return jsonify("company email already exist")
+    else:
+        CompanyRepository().add(company_to_add)
+        return jsonify("company added correctly")
+
 
 def page_not_found(error):
     return '<h1> Not found page </h1>'

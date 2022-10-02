@@ -8,6 +8,7 @@ import CompanyRegisterForm from '../components/forms/CompanyRegisterForm.vue';
 import EmployeeRegisterForm from '../components/forms/EmployeeRegisterForm.vue';
 import LoginUser from '../components/forms/LoginUser.vue'
 
+
 /*Task app */
 import TaskList from '../components/task_app/TaskList.vue'
 import CreateTask from '../components/task_app/CreateTask.vue'
@@ -21,7 +22,7 @@ const routes = [
     },
     /**User sign in/register routes */
     {
-        path:'/register/company',
+        path:'/register-company',
         name:'CompanyRegisterForm',
         component: CompanyRegisterForm,
     },
