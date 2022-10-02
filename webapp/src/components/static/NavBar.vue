@@ -8,7 +8,7 @@
                    <router-link class="nav-link active" to="/login">Login</router-link>
                 </li>
                 <li class="nav-item">
-                   <router-link class="nav-link active" to="/register/company">SignUp</router-link>
+                   <router-link class="nav-link active" to="/register-company">SignUp</router-link>
                 </li>
              </ul>
           </div>

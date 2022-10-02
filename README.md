@@ -14,7 +14,7 @@ para WINDOWS: venv\Scripts\activate
 
 3) Dentro del proyecto instalar flask y modulos que usaremos:
 
-pip install flask flask-cors flask_login sqlite3 psycopg2 python-decouple python-dotenv
+pip install flask flask-cors flask_login sqlite3 psycopg2 python-decouple python-dotenv selenium
 
 
 Dependencies
