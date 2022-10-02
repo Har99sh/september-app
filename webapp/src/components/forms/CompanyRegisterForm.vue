@@ -4,7 +4,7 @@
          <input type="text" v-model="name" placeholder="name">
          <input type="text" v-model="cif" placeholder="cif">
          <input type="email" v-model="email" placeholder="email">
-         <input type="telephone" v-model="password" placeholder="telephone">
+         <input type="telephone" v-model="telephone" placeholder="telephone">
          <!-- <input type="text" v-model="company_id" placeholder="1111"> -->
          <input type="submit" @click="submit">
       </form>
@@ -20,7 +20,7 @@ export default {
             name: "",
             cif: "",
             email: "",
-            telephone:"",
+            telephone:""
          }
       }
    },
@@ -32,7 +32,7 @@ export default {
             name: this.name,
             cif: this.cif,
             email: this.email,
-            telephone: this.telephone,
+            telephone: this.telephone
         })
         .then((response) => {
           console.log(response);

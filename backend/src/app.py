@@ -1,9 +1,10 @@
+from email.header import Header
 import imp
 from flask import Flask, jsonify, request, make_response,  url_for, redirect, g, session
 from flask_login import LoginManager, login_user, current_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 from unicodedata import name
 from uuid import  uuid1
@@ -24,6 +25,7 @@ from repository.company_repository import CompanyRepository
 from config import config
 
 app = Flask(__name__)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 CORS(app)
 
@@ -101,7 +103,8 @@ def logout():
     return make_response("user logged out")
 
 #Company register
-@app.post('/register-company')
+@app.route('/register-company',methods=['POST'])
+@cross_origin(origins= '*', headers=['Content-Type'])
 def create_company():
     new_company = request.get_json()
     print(new_company)
@@ -120,6 +123,7 @@ def create_company():
         return jsonify("company email already exist")
     else:
         CompanyRepository().add(company_to_add)
+        print("company added correctly")
         return jsonify("company added correctly")
 
 
