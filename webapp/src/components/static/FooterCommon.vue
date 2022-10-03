@@ -2,9 +2,8 @@
     <footer class="footerConteinerTotal">
         <div class="footerConteinerDivs">        
             <div class="footerLinks"><a href="">Home</a></div>
-            <div class="footerLinks"><a href="">Home</a></div>
-            <div class="footerLinks"><a href="">Home</a></div>
-            <div class="footerLinks"><a href="">Home</a></div>
+            <div class="footerLinks"><a href="">About US</a></div>
+            <div class="footerLinks"><a href="">Terms and Conditions</a></div>
         </div>
         <div class="footerCompanyInc">
             <p>© 2022 Company, Inc</p>
@@ -36,7 +35,7 @@ export default {
     background-color: white;
     display: flex;
     justify-content: center;
-    width: 120px;
+    width: 200px;
     padding: 20px;
 }
 
