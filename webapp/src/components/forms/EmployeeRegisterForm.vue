@@ -3,7 +3,7 @@
     <main>
       <div class="modal modal-signin position-static d-block py-5" tabindex="-1" role="dialog" id="modalSignin">
          <div class="modal-dialog" role="document">
-            <div class="modal-content rounded-4 shadow">
+            <div class="modal-content rounded-4 shadow" id="contenidoDelLogin">
                <div class="modal-header p-3 pb-3 border-bottom-0">
                   <p class="fw-bold mb-0 fs-5">Register</p>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -49,8 +49,8 @@
                         <label for="floatingInput">Company ID</label>
                      </div>
                      <div class=" btn-toolbar d-flex justify-content-evenly">
-                        <button class="log  btn btn-lg rounded-3 btn-md" @click="submit">Register</button>
-                        <button class="logcancel  btn btn-lg rounded-3 btn-md" type="submit"> Cancel</button>
+                        <button class="log  btn btn-lg rounded-3 btn-md" id="botonDeLogin" @click="submit">Register</button>
+                        <button class="logcancel  btn btn-lg rounded-3 btn-md" id="logCancel" type="submit"> Cancel</button>
                      </div>
                   </form>
                </div>
@@ -100,5 +100,29 @@ export default {
 };
 </script>
 <style>
-    
+.modal-header {
+  background-color: rgba(120, 166, 200, 1);
+}
+
+.modal-content {
+  background-color: rgb(49, 103, 137, 1);
+}
+
+.botonDeSubmit {
+  background-color: rgba(120, 166, 200, 1);
+  color: rgb(0, 0, 0); 
+}
+
+#contenidoDelLogin {
+  background-color: rgb(49, 103, 137, 1);
+}
+
+#botonDeLogin {
+  background-color: rgba(120, 166, 200, 1);
+  color: white; 
+}
+#logCancel {
+  background-color: rgba(120, 166, 200, 1);
+  color: white;
+}
 </style>
