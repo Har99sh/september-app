@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="style-body">
     <main>
       <div class="modal modal-signin position-static d-block py-5" tabindex="-1" role="dialog" id="modalSignin">
          <div class="modal-dialog" role="document">
@@ -100,6 +100,8 @@ export default {
 };
 </script>
 <style>
+
+
 .modal-header {
   background-color: rgba(120, 166, 200, 1);
 }
@@ -125,4 +127,12 @@ export default {
   background-color: rgba(120, 166, 200, 1);
   color: white;
 }
+.style-body {
+    margin: 0;
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: auto 1fr auto;
+    background-color: rgba(245, 245, 245, 1); 
+  }
+
 </style>

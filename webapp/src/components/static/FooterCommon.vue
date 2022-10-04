@@ -18,7 +18,7 @@ export default {
 <style>
     
 .footerConteinerTotal {
-    position: absolute;
+    position: fixed;
     bottom: 0; 
     width: 100%;
     display: flex;

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="style-body">
     <NavBar />
     <router-view />
     <FooterCommon />
@@ -16,4 +16,5 @@ export default {
 </script>
 
 <style>
+  
 </style>
