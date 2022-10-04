@@ -1,5 +1,6 @@
 <template>
-    <div class="task-form-container">
+
+    <!-- <div class="task-form-container">
 
        <div class="form-floating mb-3 ">
             <input type="text" class="form-control rounded-10" id="floatingInput" placeholder="Task title" v-model="title">
@@ -24,6 +25,48 @@
         <div class="assign-button" @click="create_task">Assign</div>
 
     </div>
+ -->
+<div class="style-body">
+    <main>
+        <div class="modal modal-signin position-static d-block py-5" tabindex="-1" role="dialog" id="modalSignin">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content rounded-4 shadow" id="contenidoDelLogin">
+                    <div class="modal-header p-3 pb-3 border-bottom-0">
+                       <p class="fw-bold mb-0 fs-5">Register</p>
+                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-4 pt-2s">
+                    <form class="">
+                        <div class="form-floating mb-3 ">
+                            <input type="text" class="form-control rounded-10" id="floatingInput" placeholder="Task title" v-model="title">
+                            <label for="floatingInput">Task Title</label>
+                        </div>
+                        <div class="form-floating mb-3 ">
+                            <textarea type="textarea" rows="15" class="form-control textarea-description rounded-10"  placeholder="Task title" v-model="description" />
+                            <label for="floatingInput">Description</label>
+                        </div>
+                        <div class="form-floating mb-3 ">
+                            <input type="date" class="form-control rounded-10" id="floatingInput" placeholder="Task title" v-model="due_date">
+                            <label for="floatingInput">Due Date</label>
+                        </div>
+                        <div class="form-floating mb-3 ">
+                            <input type="text" class="form-control rounded-10" id="floatingInput" placeholder="Task title" v-model="assignee">
+                            <label for="floatingInput">Assign to</label>
+                        </div>
+                        <div>
+                            <button class="log  btn btn-lg rounded-3 btn-md " id="botonDeLogin" @click="create_task">Assign</button>
+                        </div>
+
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+    
+
+
 </template>
 <script>
 import axios from 'axios';
