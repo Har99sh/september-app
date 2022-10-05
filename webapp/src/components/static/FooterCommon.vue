@@ -36,14 +36,14 @@ export default {
     display: flex;
     justify-content: center;
     width: 200px;
-    padding: 20px;
+    padding: 15px;
 }
 
 .footerCompanyInc {
     background-color:white;
     display: flex;
     justify-content: center;
-    padding: 20px;
+    padding: 5px;
 }  
     
 </style>
