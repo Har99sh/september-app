@@ -1,7 +1,7 @@
 <template>
     <div>
-        <span>{{hello}}</span>
-        <input type="text" name="" id="" v-model="hello">
+        <!-- <span>{{hello}}</span>
+        <input type="text" name="" id="" v-model="hello"> -->
     </div>
 </template>
 
