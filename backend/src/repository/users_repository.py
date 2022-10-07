@@ -13,6 +13,13 @@ class UserRepository:
         cursor.close()
         return user
 
+    def getUserByEmail(self, email):
+        cursor = self._dbconection.cursor(cursor_factory=extras.RealDictCursor)
+        cursor.execute('select * from users where email = %s', (email,))
+        user = self.__compound_user_model(cursor.fetchone())
+        cursor.close()
+        return user
+
     def get_by_email(self, email):
         cursor = self._dbconection.cursor(cursor_factory=extras.RealDictCursor)
         query = sql.SQL("select {fields} from {table} where email = %s").format(
@@ -74,3 +81,20 @@ class UserRepository:
             row['is_admin']    
         )
         return user.to_JSON()
+
+    def __compound_user_model(self, row):
+        if row is None:
+            return None
+
+        print(row)
+        user = Users(
+            row['id'],
+            row['name'],
+            row['surname'],
+            row['email'],
+            row['password'],
+            row['company_id'],
+            row['dni'],
+            row['is_admin']    
+        )
+        return user

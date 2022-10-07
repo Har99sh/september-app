@@ -3,6 +3,7 @@ import imp
 from flask import Flask, jsonify, request, make_response,  url_for, redirect, g, session
 from flask_login import LoginManager, login_user, current_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_jwt_extended import JWTManager, create_access_token
 
 from flask_cors import CORS, cross_origin
 
@@ -26,10 +27,12 @@ from config import config
 
 app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
+app.config['JWT-SECRET_KEY'] = 'secretKey4W'
 
 CORS(app)
 
 login_manager = LoginManager(app)
+jwt = JWTManager(app)
 
 app.register_blueprint(tasks)
 
@@ -48,7 +51,7 @@ def homepage():
 
 @app.post('/register')
 def create_user():
-    print("ejecutando regiter")
+    print("ejecutando register")
     new_user = request.get_json()
     print(new_user)
     name = new_user['name']
@@ -76,25 +79,42 @@ def login():
     user= request.get_json()
     email = user['email']
     password = user['password']
+    # Query your database for username and password
     user_repository = UserRepository()
+    userFromDb = user_repository.getUserByEmail(email)
+    passwordFromDb = userFromDb.password
+    if userFromDb is None:
+        return jsonify({"msg": "Incorrect username or password"}), 401
     
-    userFromDb = user_repository.get_by_email(email)
+    # create a new token with the user id inside
+    if check_password_hash(passwordFromDb, password): 
+        additional_claims = {"isAdmin": f"{userFromDb.is_admin}"}
+        access_token = create_access_token(identity=userFromDb.id, additional_claims=additional_claims)
+    return jsonify({ "token": access_token, "user_id": userFromDb.id })
+
+ #------------------------------------------------------------------------------------   
+    # user= request.get_json()
+    # email = user['email']
+    # password = user['password']
+    # user_repository = UserRepository()
     
-    if userFromDb:
-            passwordFromDb = userFromDb.password 
+    # userFromDb = user_repository.get_by_email(email)
+    
+    # if userFromDb:
+    #         passwordFromDb = userFromDb.password 
             
-            if check_password_hash(passwordFromDb, password):
-                login_user(userFromDb, remember=True)
+    #         if check_password_hash(passwordFromDb, password):
+    #             login_user(userFromDb, remember=True)
                 
-                return jsonify('you are logged in')
-            else:
-                # Account doesnt exist or username/password incorrect
-                print('Incorrect password')
-                return jsonify('Incorrect password')
-    else:
-        # Account doesnt exist or username/password incorrect
-        print('Incorrect email')
-        return jsonify('Incorrect email')
+    #             return jsonify('you are logged in')
+    #         else:
+    #             # Account doesnt exist or username/password incorrect
+    #             print('Incorrect password')
+    #             return jsonify('Incorrect password')
+    # else:
+    #     # Account doesnt exist or username/password incorrect
+    #     print('Incorrect email')
+    #     return jsonify('Incorrect email')
 
 
 @app.route('/logout')

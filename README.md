@@ -86,3 +86,5 @@ in console
 en caso de error OPENSSL_CONF (windows), hay que poner el siguiente comando en la terminal de venv (activada) y en la terminal de la webapp antes de hacer npm install : 
 
     set OPENSSL_CONF=
+
+PARA JWT: pip install flask-jwt-extended
