@@ -8,7 +8,7 @@
                    <router-link class="nav-link active" to="/login">Check</router-link>
                 </li>
                 <li class="nav-item">
-                   <router-link class="nav-link active" to="/register-company">Logout</router-link>
+                   <router-link class="nav-link active" to="/register-company" @click="logout()">Logout</router-link>
                 </li>
              </ul>
           </div>
@@ -16,8 +16,13 @@
     </nav>
 </template>
 <script>
+import deleteToken from '../../LocalStorageService'
 export default {
-    
+    methods: {
+       logout() {
+         deleteToken()
+       }
+    }
 }
 </script>
 <style>

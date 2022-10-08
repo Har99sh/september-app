@@ -32,7 +32,7 @@
 </template>
 <script>
 import axios from 'axios';
-import AUTH_USER from '../../Global.js'; 
+import {saveToken, saveUserId} from '../../LocalStorageService.js'; 
 export default {
     name: "LoginUser",
     data() {
@@ -50,8 +50,13 @@ export default {
             "password": this.password
         })
         .then((response) => {
-          AUTH_USER["TOKEN"] = response["token"]
-          AUTH_USER["ID"] = response["user_id"];
+          saveToken(response["token"])
+          saveUserId(response["user_id"])
+          // Aqui habria que decodificar el token para ver si es admin me redirige al dashboard admin sino al dashboardUser
+          // if (condition) {
+            
+          // }
+          // this.$router.push('../dashboard_admin')
         })
         .catch((err) => {
           console.log(err);

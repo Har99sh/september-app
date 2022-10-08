@@ -117,11 +117,6 @@ def login():
     #     return jsonify('Incorrect email')
 
 
-@app.route('/logout')
-def logout():
-    logout_user()
-    return make_response("user logged out")
-
 #Company register
 @app.post('/register-company')
 def create_company():
