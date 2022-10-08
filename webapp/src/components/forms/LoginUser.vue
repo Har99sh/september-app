@@ -32,26 +32,26 @@
 </template>
 <script>
 import axios from 'axios';
+import AUTH_USER from '../../Global.js'; 
 export default {
     name: "LoginUser",
     data() {
       return {
-        user_login_data: {
-          email: "",
-          password: "",
-        }
-      }
+        email: "",
+        password: ""
+      }   
     },
     methods: {
       authenticate() {
         const path = "http://127.0.0.1:5000/login";
       axios
         .post(path, {
-            email: this.email,
-            password: this.password
+            "email": this.email,
+            "password": this.password
         })
         .then((response) => {
-          console.log(response);
+          AUTH_USER["TOKEN"] = response["token"]
+          AUTH_USER["ID"] = response["user_id"];
         })
         .catch((err) => {
           console.log(err);
