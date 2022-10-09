@@ -18,6 +18,7 @@ import AdminTasksView from '../components/task_app/AdminTasksView.vue'
 
 /*Dashboard user */
 import UserDashboard from '../components/dashboard_user/UserDashboard.vue'
+import AdminDashboard from '../components/dashboard_admin/AdminDashboard.vue'
 
 const routes = [
     /**Static pages routes */
@@ -43,16 +44,16 @@ const routes = [
         component: LoginUser,
     },
     /**Task app routes*/
-    {
-        path:'/tasks',
-        name:'TaskList',
-        component: TaskList,
-    },
-    {
-        path:'/tasks/create',
-        name:'CreateTask',
-        component: CreateTask,
-    },
+    //{
+    //     path:'/tasks',
+    //     name:'TaskList',
+    //     component: TaskList,
+    // },
+    // {
+    //     path:'/tasks/create',
+    //     name:'CreateTask',
+    //     component: CreateTask,
+    // },
     {
         path: '/admin/tasks',
         name: 'AdminTasksView',
@@ -61,11 +62,20 @@ const routes = [
     /**User dashboard */
     {
         path: '/dashboard',
-        name: 'Dashboard',
+        name: 'UserDashboard',
         component: UserDashboard
-    }
-]
+    },
+    {
+        path: '/dashboard-admin',
+        name: 'AdminDashboard',
+        component: AdminDashboard,
+        children: [
+            { path: '/tasks/create', component: CreateTask},
+            { path: '/tasks', component: TaskList},
+          ],
+    },
 
+]
 const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
     routes: routes

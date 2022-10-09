@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import {useAuthStore} from '../../controller/store/auth.store'
+import {useAuthStore} from '../../controller/store/auth.store';
 export default {
    data() {
       return{
@@ -47,5 +47,5 @@ export default {
 }
 </script>
 <style>
-    
+
 </style>
