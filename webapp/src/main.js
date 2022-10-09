@@ -1,17 +1,18 @@
-import {createApp, h} from 'vue'
-import App from './App.vue'
+import {createApp, h} from 'vue';
+
+import App from './App.vue';
+import {createPinia} from 'pinia';
 import router from "./router/routes";
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
-import BootstrapVue3 from 'bootstrap-vue-3'
-import $ from 'jquery'
-import auth_data from './controller/auth'
-  
+
+import BootstrapVue3 from 'bootstrap-vue-3';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
+
+
+
+
+//let auth_service = new AuthService();
 const app = createApp({
   render: () => h(App),
 })
-app.use(auth_data)
-app.use(BootstrapVue3)
-app.use($)
-app.use(router) 
-app.mount("#app");
+app.use(createPinia()).use(BootstrapVue3).use(router).mount("#app");

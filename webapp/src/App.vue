@@ -1,6 +1,6 @@
 <template>
   <div class="style-body">
-    <NavBar />
+    <NavBar/>
     <router-view />
     <!-- <FooterCommon /> -->
   </div>
@@ -11,7 +11,7 @@
 import NavBar from './components/static/NavBar.vue'
 export default {
   name: 'App',
-  components: {  NavBar},
+  components: {NavBar},
 }
 </script>
 

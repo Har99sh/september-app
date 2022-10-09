@@ -30,7 +30,7 @@ from config import config
 
 app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
-app.config['JWT-SECRET_KEY'] = 'secretKey4W'
+app.config['JWT_SECRET_KEY'] = config["JWT_KEY"]
 
 CORS(app)
 
@@ -74,7 +74,7 @@ def create_user():
     #Check if account exists 
     account_exist = UserRepository().get_by_email(email)
     if account_exist:
-        return jsonify("user email already exist")
+        return make_response(status=409)
     else:
         UserRepository().add(user_to_add)
         return jsonify("user added correctly")
@@ -89,13 +89,13 @@ def login():
     userFromDb = user_repository.getUserByEmail(email)
     passwordFromDb = userFromDb.password
     if userFromDb is None:
-        return jsonify({"msg": "Incorrect username or password"}), 401
+        return jsonify({"msg": "Incorrect username or password"})
     
     # create a new token with the user id inside
     if check_password_hash(passwordFromDb, password): 
-        additional_claims = {"isAdmin": f"{userFromDb.is_admin}"}
+        additional_claims = {"isAdmin": f"{userFromDb.is_admin}", "companyID": f"{userFromDb.company_id}"}
         access_token = create_access_token(identity=userFromDb.id, additional_claims=additional_claims)
-    return jsonify({ "token": access_token, "user_id": userFromDb.id })
+        return make_response(jsonify({ "token": access_token, "user_id": userFromDb.id }), 200)
 
  #------------------------------------------------------------------------------------   
     # user= request.get_json()

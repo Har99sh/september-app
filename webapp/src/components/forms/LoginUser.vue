@@ -19,7 +19,7 @@
                      <label for="floatingPassword">Password</label>
                    </div>
                  <div class="btn-toolbar d-flex justify-content-evenly">
-                     <button class="log  btn btn-lg rounded-3 btn-md botonDeLogin" id="botonDeLogin" @click="authenticate">Login</button>
+                     <div  class="log  btn btn-lg rounded-3 btn-md botonDeLogin" id="botonDeLogin" @click="authenticate">Login</div>
                      <button class="btn btn-lg rounded-3 btn-md" id="logCancel" type="submit">Cancel</button>
                  </div>
                </form>
@@ -31,8 +31,7 @@
   </div>
 </template>
 <script>
-import axios from 'axios';
-import {saveToken, saveUserId} from '../../LocalStorageService.js'; 
+import { useAuthStore } from '../../controller/store/auth.store';
 export default {
     name: "LoginUser",
     data() {
@@ -43,25 +42,12 @@ export default {
     },
     methods: {
       authenticate() {
-        const path = "http://127.0.0.1:5000/login";
-      axios
-        .post(path, {
-            "email": this.email,
-            "password": this.password
-        })
-        .then((response) => {
-          //this.$auth_data.setUserData(response.data)
-          saveToken(response["token"])
-          saveUserId(response["user_id"])
-          // Aqui habria que decodificar el token para ver si es admin me redirige al dashboard admin sino al dashboardUser
-          // if (condition) {
-            
-          // }
-          // this.$router.push('../dashboard_admin')
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        const authStore = new useAuthStore();
+        let login_data = {
+          "email": this.email,
+          "password": this.password
+        }
+        authStore.login(login_data)
       }
     }
 }

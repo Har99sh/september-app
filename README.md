@@ -34,6 +34,7 @@ Dependencies
     flask_login
     flask_cors
     werkzeug
+    flask-jwt-extended
 
 **Database:**
 
@@ -46,20 +47,10 @@ Dependencies
     vue-router
     bootstrap-vue
     bootstrap
+    pinia
 
 
 
-<h3>Database:</h3>
-
-Download postgres, run an instance on your machine
-
-in console
-
-    $createdb db_just_4_work 
-
-    $psql db_just_4_work < "COPY YOUR ROUTE TO THE FILE HERE"/september-app/pg_dump.sql
-
-    
 
 
 In the root of project, create .env file with the following variables
@@ -72,6 +63,10 @@ In the root of project, create .env file with the following variables
     PGSQL_DATABASE  = 'db_just_4_work'
     PGSQL_PORT = 5414   your port
 
+    JWT_KEY = 'generate key'
+
+
+
 <h3>Vue dependencies</h3>
 
 Enter your root project folder  (carpeta raíz del proyecto)
@@ -83,8 +78,14 @@ in console
     npm install 
     npm run serve
 
+
+<h3>Flask dependencies</h3>
+
+in console
+
+    cd backend
+    / activate venv command for your os/
+    pip3 (or pip) install -r requirements.txt
 en caso de error OPENSSL_CONF (windows), hay que poner el siguiente comando en la terminal de venv (activada) y en la terminal de la webapp antes de hacer npm install : 
 
     set OPENSSL_CONF=
-
-PARA JWT: pip install flask-jwt-extended

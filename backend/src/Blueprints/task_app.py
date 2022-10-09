@@ -10,6 +10,7 @@ jwtManager = JWTManager()
 task_repository = TasksRepository()
 
 @tasks.get('/')
+@jwt_required()
 def get_tasks():
     try:
         task_list = task_repository.get_list()
@@ -18,6 +19,7 @@ def get_tasks():
         return make_response(e.__str__(), 400)
 
 @tasks.get('/<id>')
+@jwt_required()
 def get_one_task(id):
     try:
         task = task_repository.get_one(id)
@@ -55,7 +57,7 @@ def create():
             due_date = task_data["due_date"] 
             is_completed = task_data["is_completed"]
             #Create task object from model
-            created_task = Tasks(task_id, employee_id, assigned_by_id, company_id, title,description,due_date,is_completed)
+            created_task = Tasks(task_id, employee_id, assigned_by_id, company_id, title, description,due_date,is_completed)
             # Add to db
             task_repository.create(created_task)
             
@@ -64,6 +66,7 @@ def create():
             return make_response(e.__str__(), 400)
     
 @tasks.put('/done/≤id>')
+@jwt_required()
 def mark_as_done():
     try:
         task_repository.update('done', id)
