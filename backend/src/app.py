@@ -23,6 +23,9 @@ from Blueprints.company_blueprint import company
 from models.company import Company
 from repository.company_repository import CompanyRepository
 
+#Employees
+from Blueprints.employees import employee
+
 from config import config
 
 app = Flask(__name__)
@@ -35,6 +38,8 @@ login_manager = LoginManager(app)
 jwt = JWTManager(app)
 
 app.register_blueprint(tasks)
+app.register_blueprint(company)
+app.register_blueprint(employee)
 
 @login_manager.user_loader
 def load_user(id):
@@ -76,7 +81,7 @@ def create_user():
 
 @app.post('/login')
 def login():
-    user= request.get_json()
+    user = request.get_json()
     email = user['email']
     password = user['password']
     # Query your database for username and password

@@ -14,6 +14,7 @@ config = {
     'PGSQL_USER': environ.get('PGSQL_USER'),
     'PGSQL_PASSWORD': environ.get('PGSQL_PASSWORD'),
     'PGSQL_DATABASE': environ.get('PGSQL_DATABASE'),
-    'PGSQL_HOST': environ.get('PGSQL_HOST')
+    'PGSQL_HOST': environ.get('PGSQL_HOST'),
+    'JWT_KEY': environ.get('JWT_KEY')
 }
 

@@ -1,6 +1,7 @@
 from flask import Blueprint, make_response
 from models.company import Company
 from database.db import get_connection
+from repository.employee import EmployeeRepository
 
 
 company = Blueprint('company', __name__, url_prefix="/company")
