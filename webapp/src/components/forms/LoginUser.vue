@@ -50,6 +50,7 @@ export default {
             "password": this.password
         })
         .then((response) => {
+          //this.$auth_data.setUserData(response.data)
           saveToken(response["token"])
           saveUserId(response["user_id"])
           // Aqui habria que decodificar el token para ver si es admin me redirige al dashboard admin sino al dashboardUser

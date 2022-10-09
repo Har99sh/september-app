@@ -21,4 +21,11 @@ function deleteToken(){
     localStorage.removeItem("userToken")
 }
 
-export default {saveToken, saveUserId, getUserToken, getUserId, deleteToken}
+function setCompanyId(id) {
+    localStorage.setItem("company_id", id)
+} 
+
+function getCompanyId() {
+    return localStorage.getItem("company_id")
+}
+export default {saveToken, saveUserId, getUserToken, getUserId, deleteToken, setCompanyId, getCompanyId}

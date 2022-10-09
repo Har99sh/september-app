@@ -2,16 +2,16 @@
   <div class="style-body">
     <NavBar />
     <router-view />
-    <FooterCommon />
+    <!-- <FooterCommon /> -->
   </div>
 </template>
 
 <script>
-import FooterCommon from './components/static/FooterCommon.vue'
+// import FooterCommon from './components/static/FooterCommon.vue'
 import NavBar from './components/static/NavBar.vue'
 export default {
   name: 'App',
-  components: { FooterCommon, NavBar },
+  components: {  NavBar},
 }
 </script>
 
