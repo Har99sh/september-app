@@ -47,7 +47,7 @@ export default {
           "email": this.email,
           "password": this.password
         }
-        authStore.login(login_data)
+        authStore.login(login_data);
       }
     }
 }

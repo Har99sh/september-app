@@ -23,8 +23,7 @@
                     <b-button class="m-1" 
                               :variant="done_style(task.is_completed)" 
                               @click="markAsDone(task.id)"
-                              :disabled="task.is_completed"
-                              >
+                              :disabled="task.is_completed">
                             Mark As Done 
                     </b-button>
                 </div>
@@ -32,10 +31,20 @@
         </div>
     </div>
     <!--Show this if there are no tasks in the database-->
-    <div v-else>There are no tasks!</div>
+    <div v-else>
+        <b-card
+            overlay
+            img-src="https://picsum.photos/900/250/?image=3"
+            img-alt="Card Image"
+            text-variant="white"
+            title="You do not have any tasks at the moment">
+        </b-card>
+    </div>
 </template>
 <script>
 import axios from 'axios';
+import { useAuthStore } from '../../controller/store/auth.store';
+import {TaskStore} from '../../controller/store/task_api.store'
 export default {
     name : 'TaskList',
     data() {
@@ -48,12 +57,16 @@ export default {
             show_description: false,
             description_text: "DESCRIPTION",
             mark_as_done:"",
+            authStore: new useAuthStore,
+            taskStore: new TaskStore,
         }
     },
     methods: {
         getTasks() {
-            const path = "http://127.0.0.1:5000/tasks";
-            axios.get(path)
+            console.log(this.taskStore.getMyTasks())
+            const path = "http://127.0.0.1:5000/tasks/mine/"+this.authStore.user.user_id;
+            const token = this.authStore.getToken();
+            axios.get(path, { headers: {"Authorization" : 'Bearer ' + token}})
             .then(response => {
                 this.master_list = response.data
                 this.task_list = response.data.filter((task) => task.is_completed == false);
@@ -124,4 +137,5 @@ export default {
 .d-none {
     display: none;
 }
+
 </style>

@@ -28,6 +28,21 @@ class TasksRepository:
         
         return task_list
     
+    def get_my_tasks(self, id):
+        task_list = []
+        cursor = self.dbconnection.cursor(cursor_factory=extras.RealDictCursor)
+        cursor.execute('Select * FROM task_app WHERE employee_id = %s', (id,))
+        rows = cursor.fetchall()
+        for row in rows:
+            task_list.append(self.__compound_task(row))
+        
+        cursor.close()
+        
+        if len(task_list) == 0 or None :
+            return []
+        
+        return task_list
+    
     def create(self, task:Tasks):
         cursor = self.dbconnection.cursor(cursor_factory=extras.RealDictCursor)
         cursor.execute('insert into task_app (id, employee_id, assigned_by_id, company_id, title, description, due_date, is_completed)values (%s, %s, %s, %s, %s, %s, %s, %s)',

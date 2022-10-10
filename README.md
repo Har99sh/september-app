@@ -48,6 +48,7 @@ Dependencies
     bootstrap-vue
     bootstrap
     pinia
+    jwt-decode
 
 
 

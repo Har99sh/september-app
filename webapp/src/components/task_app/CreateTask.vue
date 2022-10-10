@@ -47,6 +47,7 @@
 </template>
 <script>
 import axios from 'axios';
+import { useAuthStore } from '../../controller/store/auth.store';
 export default {
     name: 'CreateTask',
     data() {
@@ -60,11 +61,13 @@ export default {
             company_id: "1111",
             is_completed : false,
             task_not_created: false,
-            employee_list : []
+            employee_list : [],
+            authStore: new useAuthStore
         }
     },
     methods: {
         create_task() {
+            const token = this.authStore.getToken();
             const path = "http://127.0.0.1:5000/tasks/create";
             axios
             .post(path, {
@@ -75,7 +78,7 @@ export default {
                 assigned_by_id: this.assigned_by,
                 company_id: this.company_id,
                 is_completed : this.is_completed,
-            })
+            }, { headers: {"Authorization" : 'Bearer ' + token}})
             .then((response) => {
                 console.log(response)
                 if (response.status == 200)

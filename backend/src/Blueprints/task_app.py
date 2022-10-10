@@ -18,6 +18,15 @@ def get_tasks():
     except Exception as e:
         return make_response(e.__str__(), 400)
 
+@tasks.get('/mine/<employee_id>')
+@jwt_required()
+def get_my_tasks(employee_id):
+    try:
+        task_list = task_repository.get_my_tasks(employee_id)
+        return make_response(task_list, 200)
+    except Exception as e:
+        return make_response(e.__str__(), 400)
+    
 @tasks.get('/<id>')
 @jwt_required()
 def get_one_task(id):

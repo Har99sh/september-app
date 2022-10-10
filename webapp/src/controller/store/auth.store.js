@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
 import router from '@/router/routes';
+import jwtDecode from 'jwt-decode';
 
 const baseUrl = 'http://127.0.0.1:5000/'
 
@@ -16,10 +17,13 @@ export const useAuthStore = defineStore({
             axios.post(baseUrl + 'login', user)
             .then((response) => {
                 let user = response.data;
+                let dashboard = "";
                 this.user = user;
                 localStorage.setItem('j4w_user', JSON.stringify(user));
+                let token_data = jwtDecode(this.user.token)
+                dashboard = token_data.isAdmin ? "/dashboard-admin" : "/dashboard-user"
                 //Go to url after login
-                router.push(this.returnUrl || {path: '/'})               
+                router.push(this.returnUrl || {path: dashboard})               
             })
             .catch(err => console.log(err))
         },
@@ -30,6 +34,15 @@ export const useAuthStore = defineStore({
         isLoggedIn() {
             let loggedIn = localStorage.getItem('j4w_user')
             return loggedIn == this.user ? true : false
-        }
+        },
+        getToken(){
+            return this.user.token;
+        },
+        getUserId(){
+            if (this.user == null)
+               " this.user.user_id";
+            else 
+                this.user.user_id;
+        },
     }
 });
