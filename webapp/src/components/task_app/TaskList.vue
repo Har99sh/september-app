@@ -43,7 +43,6 @@
 </template>
 <script>
 import axios from 'axios';
-import { useAuthStore } from '../../controller/store/auth.store';
 import {TaskStore} from '../../controller/store/task_api.store'
 export default {
     name : 'TaskList',
@@ -57,23 +56,23 @@ export default {
             show_description: false,
             description_text: "DESCRIPTION",
             mark_as_done:"",
-            authStore: new useAuthStore,
             taskStore: new TaskStore,
         }
     },
     methods: {
         getTasks() {
-            console.log(this.taskStore.getMyTasks())
-            const path = "http://127.0.0.1:5000/tasks/mine/"+this.authStore.user.user_id;
-            const token = this.authStore.getToken();
-            axios.get(path, { headers: {"Authorization" : 'Bearer ' + token}})
-            .then(response => {
-                this.master_list = response.data
-                this.task_list = response.data.filter((task) => task.is_completed == false);
-            })
-            .catch(err => {
-                console.log(err)
-            })
+            this.taskStore.getMyTasks();
+            // console.log(this.authStore)
+            // const path = "http://127.0.0.1:5000/tasks/mine/"+this.authStore.user.user_id;
+            // const token = this.authStore.getToken();
+            // axios.get(path, { headers: {"Authorization" : 'Bearer ' + token}})
+            // .then(response => {
+            //     this.master_list = response.data
+            //     this.task_list = response.data.filter((task) => task.is_completed == false);
+            // })
+            // .catch(err => {
+            //     console.log(err)
+            // })
         },
         markAsDone(id) {
             //this.getTaskId();
@@ -113,6 +112,7 @@ export default {
     },
 }
 </script>
+
 <style scoped>
 .all-tasks-container {
     display: flex;

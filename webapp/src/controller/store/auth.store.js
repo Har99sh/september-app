@@ -13,19 +13,18 @@ export const useAuthStore = defineStore({
     }),
     actions: {
         login(user) {
-            console.log(baseUrl)
             axios.post(baseUrl + 'login', user)
-            .then((response) => {
-                let user = response.data;
-                let dashboard = "";
-                this.user = user;
-                localStorage.setItem('j4w_user', JSON.stringify(user));
-                let token_data = jwtDecode(this.user.token)
-                dashboard = token_data.isAdmin ? "/dashboard-admin" : "/dashboard-user"
-                //Go to url after login
-                router.push(this.returnUrl || {path: dashboard})               
-            })
-            .catch(err => console.log(err))
+                .then((response) => {
+                    let user = response.data;
+                    let dashboard = "";
+                    this.user = user;
+                    localStorage.setItem('j4w_user', JSON.stringify(this.user));
+                    let token_data = jwtDecode(this.user.token)
+                    dashboard = token_data.isAdmin ? "/dashboard-admin" : "/dashboard-user"
+                    //Go to url after login
+                    router.push(this.returnUrl || {path: dashboard})               
+                })
+                .catch(err => console.log(err))
         },
         logout() {
             this.user = null;
@@ -34,15 +33,6 @@ export const useAuthStore = defineStore({
         isLoggedIn() {
             let loggedIn = localStorage.getItem('j4w_user')
             return loggedIn == this.user ? true : false
-        },
-        getToken(){
-            return this.user.token;
-        },
-        getUserId(){
-            if (this.user == null)
-               " this.user.user_id";
-            else 
-                this.user.user_id;
-        },
+        }
     }
 });
