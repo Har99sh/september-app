@@ -1,3 +1,4 @@
+from datetime import date, datetime
 from flask import Blueprint, make_response, jsonify, request
 from uuid import uuid1
 from models.time_tracker_app import TimeTracker
@@ -28,17 +29,18 @@ def get_time_tracker():
         except Exception as e:
             return make_response(e.__str__(), 400)
 
-@time_tracker.post('/start')
+@time_tracker.post('/start/<id>')
 @jwt_required()
-def start_shift():
+def start_shift(id):
     try:
-        time_tracker_data = request.get_json()
         #Create data variables from request
         timeTracker_id = str(uuid1())
-        sign_in = time_tracker_data["sign_in"]
-        employee_id = time_tracker_data["employee_id"]                  
+        work_day = date.today()
+        sign_in = datetime.now()
+        sign_out = None
+        employee_id = id               
         #Create time tracker object from model
-        created_time_tracker = TimeTracker(timeTracker_id, sign_in, employee_id)
+        created_time_tracker = TimeTracker(timeTracker_id, work_day, sign_in, sign_out, employee_id)
         # Add to db
         time_tracker_repository.checkin(created_time_tracker)
         
@@ -47,11 +49,12 @@ def start_shift():
             return make_response(e.__str__(), 400)
 
 
-@time_tracker.post('/end')
+@time_tracker.post('/end/<id>')
 @jwt_required()
-def mark_as_done():
+def end_shift(id):
     try:
-        time_tracker_repository.checkout('done', id)
+        work_day = date.today()
+        time_tracker_repository.checkout(work_day, id)
         return make_response('Shift has ended', 200)
     except Exception as e:
         return make_response(e.__str__(), 400)

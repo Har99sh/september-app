@@ -9,7 +9,7 @@ class TimeTrackerRepository:
     def get_time_tracker_list(self, id):
         time_tracker_list = []
         cursor = self.dbconnection.cursor(cursor_factory=extras.RealDictCursor)
-        cursor.execute('select * from shift_tracker WHERE company_id = %s', (id,))
+        cursor.execute('select * from shift_tracker WHERE company_id  = %s', (id,))
         rows = cursor.fetchall()
         for row in rows:
                 time_tracker_list.append(self.__compound_timeTracker(row))
@@ -36,24 +36,20 @@ class TimeTrackerRepository:
     
     def checkin(self, timeTracker:TimeTracker):
         cursor = self.dbconnection.cursor(cursor_factory=extras.RealDictCursor)
-        cursor.execute('insert into shift_tracker (id, sign_in, sign_out, total_hours, work_day, employee_id, company_id)values (%s, %s, %s, %s, %s, %s, %s)',
+        cursor.execute('insert into shift_tracker (id, work_day, sign_in, employee_id) values (%s, %s, %s, %s)',
                        (
                            timeTracker.id,
-                           timeTracker.sign_in,
-                           timeTracker.sign_out,
-                           timeTracker.total_hours,
                            timeTracker.work_day,
+                           timeTracker.sign_in,
                            timeTracker.employee_id,
-                           timeTracker.company_id                          
-                      
                        ))
         self.dbconnection.commit()
         cursor.close()
        
 
-    def checkout(self, id):
+    def checkout(self, work_day, employee_id):
         cursor = self.dbconnection.cursor()
-        cursor.execute('UPDATE shift_tracker SET sign_out = now() where id = %s', (id,))
+        cursor.execute('UPDATE shift_tracker SET sign_out = now() where work_day = %s and employee_id = %s', (work_day, employee_id,))
         self.dbconnection.commit()
         cursor.close()
             
