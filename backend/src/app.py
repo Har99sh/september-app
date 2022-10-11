@@ -26,6 +26,9 @@ from repository.company_repository import CompanyRepository
 #Employees
 from Blueprints.employees import employee
 
+#Time Tracker
+from Blueprints.time_tracker_app import time_tracker
+
 from config import config
 
 app = Flask(__name__)
@@ -40,6 +43,7 @@ jwt = JWTManager(app)
 app.register_blueprint(tasks)
 app.register_blueprint(company)
 app.register_blueprint(employee)
+app.register_blueprint(time_tracker)
 
 @login_manager.user_loader
 def load_user(id):
