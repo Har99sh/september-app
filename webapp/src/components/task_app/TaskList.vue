@@ -56,23 +56,12 @@ export default {
             show_description: false,
             description_text: "DESCRIPTION",
             mark_as_done:"",
-            taskStore: new TaskStore,
+            taskStore: TaskStore(),
         }
     },
     methods: {
-        getTasks() {
-            this.taskStore.getMyTasks();
-            // console.log(this.authStore)
-            // const path = "http://127.0.0.1:5000/tasks/mine/"+this.authStore.user.user_id;
-            // const token = this.authStore.getToken();
-            // axios.get(path, { headers: {"Authorization" : 'Bearer ' + token}})
-            // .then(response => {
-            //     this.master_list = response.data
-            //     this.task_list = response.data.filter((task) => task.is_completed == false);
-            // })
-            // .catch(err => {
-            //     console.log(err)
-            // })
+       getTasks() {
+            this.task_list = this.taskStore.getMyTasks();
         },
         markAsDone(id) {
             //this.getTaskId();
@@ -105,11 +94,9 @@ export default {
             }
         }
     },
-    computed:{
-    },
-    created() {       
+    beforeMount() {
         this.getTasks();
-    },
+    }
 }
 </script>
 

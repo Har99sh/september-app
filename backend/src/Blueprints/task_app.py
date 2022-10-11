@@ -52,27 +52,26 @@ def delete_by_id(id):
 @tasks.post('/create')
 @jwt_required()
 def create():
-    claims= get_jwt()
-    if claims["isAdmin"]:
-        try:
-            task_data = request.get_json()
-            #Create data variables from request
-            task_id = str(uuid1())
-            employee_id = task_data["employee_id"]
-            assigned_by_id = task_data["assigned_by_id"]
-            company_id = task_data["company_id"]
-            title = task_data["title"]
-            description = task_data["description"]
-            due_date = task_data["due_date"] 
-            is_completed = task_data["is_completed"]
-            #Create task object from model
-            created_task = Tasks(task_id, employee_id, assigned_by_id, company_id, title, description,due_date,is_completed)
-            # Add to db
-            task_repository.create(created_task)
-            
-            return make_response("task is created", 200)
-        except Exception as e:
-            return make_response(e.__str__(), 400)
+    print(request.get_json())
+    try:
+        task_data = request.get_json()
+        #Create data variables from request
+        task_id = str(uuid1())
+        employee_id = task_data["employee_id"]
+        assigned_by_id = task_data["assigned_by_id"]
+        company_id = task_data["company_id"]
+        title = task_data["title"]
+        description = task_data["description"]
+        due_date = task_data["due_date"] 
+        is_completed = task_data["is_completed"]
+        #Create task object from model
+        created_task = Tasks(task_id, employee_id, assigned_by_id, company_id, title, description,due_date,is_completed)
+        # Add to db
+        task_repository.create(created_task)
+        
+        return make_response("task is created", 200)
+    except Exception as e:
+        return make_response(e.__str__(), 400)
     
 @tasks.put('/done/≤id>')
 @jwt_required()

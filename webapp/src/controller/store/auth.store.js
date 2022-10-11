@@ -9,7 +9,7 @@ export const useAuthStore = defineStore({
     id: 'auth',
     state: () => ({
         user: JSON.parse(localStorage.getItem('j4w_user')),
-        returnUrl: null
+        returnUrl: null,
     }),
     actions: {
         login(user) {

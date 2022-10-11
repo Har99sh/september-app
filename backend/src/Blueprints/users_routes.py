@@ -2,7 +2,6 @@ from flask import Blueprint, make_response
 from models.users import Users
 from database.db import get_connection
 
-
 users = Blueprint('users', __name__, url_prefix="/users")
 
 @users.get('/')

@@ -1,5 +1,21 @@
 <template lang="">
 <div>
+  <b-form inline>
+    <label class="sr-only" for="inline-form-input-name">Email</label>
+    <b-form-input
+      id="inline-form-input-name"
+      class="mb-2 mr-sm-2 mb-sm-0"
+      placeholder="email@sm.com"
+      v-model="email"
+    ></b-form-input>
+
+    <label class="sr-only" for="inline-form-input-username">Password</label>
+    <b-input-group prepend="*" class="mb-2 mr-sm-2 mb-sm-0">
+      <b-form-input type="password" id="inline-form-input-username" placeholder="Username"></b-form-input>
+    </b-input-group>
+    <b-form-checkbox class="mb-2 mr-sm-2 mb-sm-0">Remember me</b-form-checkbox>
+    <b-button type="submit"  variant="primary" @click="authenticate">Login</b-button>
+  </b-form>
     <main>
       <div class="modal modal-signin position-static d-block py-5" tabindex="-1" role="dialog" id="modalSignin">
          <div class="modal-dialog" role="document">
@@ -11,7 +27,7 @@
              <div class="modal-body p-4 pt-2s">
                <form class="">
                  <div class="form-floating mb-3">
-                   <input type="Name" class="form-control rounded-10" id="floatingInput" placeholder="email" v-model="email">
+                   <input type="Name" class="form-control rounded-10" id="floatingInput" placeholder="email" >
                    <label for="floatingInput">User</label>
                  </div>
                  <div class="form-floating mb-3">
@@ -19,7 +35,7 @@
                      <label for="floatingPassword">Password</label>
                    </div>
                  <div class="btn-toolbar d-flex justify-content-evenly">
-                     <div  class="log  btn btn-lg rounded-3 btn-md botonDeLogin" id="botonDeLogin" @click="authenticate">Login</div>
+                     <div type="submit" class="log  btn btn-lg rounded-3 btn-md botonDeLogin" id="botonDeLogin" @submit="authenticate">Login </div>
                      <button class="btn btn-lg rounded-3 btn-md" id="logCancel" type="submit">Cancel</button>
                  </div>
                </form>

@@ -47,7 +47,7 @@
 </template>
 <script>
 import axios from 'axios';
-import { useAuthStore } from '../../controller/store/auth.store';
+import { TaskStore } from '../../controller/store/task_api.store';
 export default {
     name: 'CreateTask',
     data() {
@@ -62,15 +62,12 @@ export default {
             is_completed : false,
             task_not_created: false,
             employee_list : [],
-            authStore: new useAuthStore
+            taskStore: new TaskStore
         }
     },
     methods: {
         create_task() {
-            const token = this.authStore.getToken();
-            const path = "http://127.0.0.1:5000/tasks/create";
-            axios
-            .post(path, {
+            this.taskStore.create_task({
                 title : this.title,
                 description: this.description,
                 due_date: this.due_date,
@@ -78,15 +75,13 @@ export default {
                 assigned_by_id: this.assigned_by,
                 company_id: this.company_id,
                 is_completed : this.is_completed,
-            }, { headers: {"Authorization" : 'Bearer ' + token}})
-            .then((response) => {
-                console.log(response)
-                if (response.status == 200)
-                    this.$router.push({path: '/tasks'});
             })
-            .catch(() => {
-                this.task_not_created = true;
-            })
+            // .then(() => {
+            //     this.$router.push({path: '/tasks'});
+            // })
+            // .catch(() => {
+            //     this.task_not_created = true;
+            // })
         },
         try_again() {
             this.task_not_created = false;
