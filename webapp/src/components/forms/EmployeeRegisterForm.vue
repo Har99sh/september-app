@@ -1,56 +1,39 @@
 <template>
     <div class="style-body">
     <main>
-      <div class="modal modal-signin position-static d-block py-5" tabindex="-1" role="dialog" id="modalSignin">
+      <div class="modal modal-register position-static d-block py-5" tabindex="-1" role="dialog" id="modalRegister">
          <div class="modal-dialog" role="document">
-            <div class="modal-content rounded-4 shadow" id="contenidoDelLogin">
+            <div class="modal-content rounded-4 shadow">
                <div class="modal-header p-3 pb-3 border-bottom-0">
-                  <p class="fw-bold mb-0 fs-5">Register</p>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  <p class="fw-bold mb-0 fs-5">Register Employee</p>
                </div>
                <div class="modal-body p-4 pt-2s">
                   <form class="">
                      <div class="form-floating mb-3 ">
-                        <input type="Name" class="form-control rounded-10" id="floatingInput" placeholder="Name" v-model="name">
-                        <label for="floatingInput">Name</label>
+                        <input type="Name" class="form-control rounded-10" placeholder="Name" v-model="name" id="firstname">
+                        <label for="firstname">Name</label>
                      </div>
                      <div class="form-floating mb-3">
-                        <input type="Lastname" class="form-control rounded-3" id="floatingInput"
-                           placeholder="Last Name" v-model="surname">
-                        <label for="floatingInput">Last Name</label>
+                        <input type="Lastname" class="form-control rounded-3" v-model="surname" id="surname" placeholder="Last Name">
+                        <label for="surname">Last name</label>
+                     </div>                    
+                      <div class="form-floating mb-3">
+                        <input type="ID" class="form-control rounded-3" v-model="dni" id="dni" placeholder="X------">
+                        <label for="surname">DNI</label>
                      </div>
                      <div class="form-floating mb-3">
-                        <input type="text" class="form-control rounded-3" id="floatingInput" placeholder="DNI" v-model="dni">
+                        <input type="E-mail" class="form-control rounded-3" id="email"
+                           placeholder="name@example.com">
+                        <label for="email">E-mail</label>
+                     </div>
+                     <div class="form-floating mb-3">
+                        <input type="password" class="form-control rounded-3" id="password" v-model="password" placeholder="***********">
 
-                        <label for="floatingInput">DNI</label>
+                        <label for="password">Password</label>
                      </div>
-                     <div class="form-floating mb-3">
-                        <input type="E-mail" class="form-control rounded-3" id="floatingInput"
-                           placeholder="name@example.com" v-model="email">
-                        <label for="floatingInput">E-mail </label>
-                     </div>
-                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control rounded-3" id="floatingPassword"
-                           placeholder="Password" v-model="password">
-                        <label for="floatingPassword">Password</label>
-                     </div>
-                     <div class="form-floating mb-3">
-                        <input type="confirm-password" class="form-control rounded-3" id="floatingPassword"
-                           placeholder="Password" v-model="password">
-                        <label for="floatingPassword">Confirm your Password</label>
-                     </div>
-                     <div class="form-check mb-3">
-                        <input type="checkbox" class="form-check-input" id="is_admin" v-model="is_admin">
-                        <label class="floating-input" for="is_admin">Admin?</label>
-                     </div>
-                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control rounded-3" id="floatingInput" placeholder="Company Id" v-model="company_id">
-
-                        <label for="floatingInput">Company ID</label>
-                     </div>
+                      <b-form-checkbox v-model="is_admin" >Admin</b-form-checkbox>
                      <div class=" btn-toolbar d-flex justify-content-evenly">
-                        <button class="log  btn btn-lg rounded-3 btn-md" id="botonDeLogin" @click="submit">Register</button>
-                        <button class="logcancel  btn btn-lg rounded-3 btn-md" id="logCancel" type="submit"> Cancel</button>
+                        <button class="log btn btn-lg rounded-3 btn-md botonDeSubmit" type="submit" @click="submit">Submit</button>
                      </div>
                   </form>
                </div>
@@ -100,39 +83,4 @@ export default {
 };
 </script>
 <style scoped>
-
-
-.modal-header {
-  background-color: rgba(120, 166, 200, 1);
-}
-
-.modal-content {
-  background-color: rgb(49, 103, 137, 1);
-}
-
-.botonDeSubmit {
-  background-color: rgba(120, 166, 200, 1);
-  color: rgb(0, 0, 0); 
-}
-
-#contenidoDelLogin {
-  background-color: rgb(49, 103, 137, 1);
-}
-
-#botonDeLogin {
-  background-color: rgba(120, 166, 200, 1);
-  color: white; 
-}
-#logCancel {
-  background-color: rgba(120, 166, 200, 1);
-  color: white;
-}
-.style-body {
-    margin: 0;
-    display: grid;
-    min-height: 100vh;
-    grid-template-rows: auto 1fr auto;
-    background-color: rgba(245, 245, 245, 1); 
-  }
-
 </style>

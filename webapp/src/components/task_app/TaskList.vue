@@ -52,7 +52,7 @@
                                 <b-button-group class="d-flex justify-content-evenly">
                                 <b-button variant="outline-danger">Comment</b-button>
                                 <b-button :variant="done_style(task.is_completed)" 
-                                        @click="markAsDone(task.id)"
+                                        @click="taskStore.markAsDone(task.id)"
                                         :disabled="task.is_completed">
                                         Done
                                 </b-button>
@@ -96,7 +96,9 @@ export default {
     },
     methods: {
         markAsDone(id) {
-            this.taskStore.markAsDone(id)
+            this.taskStore.markAsDone(id);
+            this.task_list = this.taskStore.undone_task_list;
+            this.updateView();
         },
         done_style(done){
             if (done) {
@@ -115,15 +117,16 @@ export default {
                 this.task_list = this.master_list.filter((task) => task.is_completed == false);
             }  
         },
-        sort_task(sort_by) {
-            if (sort_by == "due_date") {
-                this.task_list = this.task_list.sort((a,b) => new Date(a.due_date) - new Date(b.due_date));
-            }
+        getMyTasks() {
+            this.taskStore.getMyTasks()
+            this.task_list = this.taskStore.undone_task_list;
+        },
+        updateView() {
+            this.$forceUpdate();
         }
     },
-    mounted() {
-        this.taskStore.getMyTasks();
-        this.task_list = this.taskStore.task_list;
+    beforeMount() {
+        this.getMyTasks();
     }
 }
 </script>

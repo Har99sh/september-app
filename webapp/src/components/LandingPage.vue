@@ -4,57 +4,46 @@
           <span class="main-title">Welcome to Just 4 Work</span>
           <span class="slogan-title">Solutions for you workspace in one site</span>
         </div>
-
         <div class="cards-container">
-              <b-card
+            <b-card
                 title="Shift timer"
                 :img-src="shift_tracker_image"
                 img-alt="Image"
                 img-top
                 tag="article"
                 style="max-width: 20rem;"
-                class="mb-2"
-              >
+                class="mb-2">
                 <b-card-text>
                   Easily start your shift timer and have access to all the logs.
                 </b-card-text>
-
                 <b-button variant="primary">+ Info</b-button>
-              </b-card>
-
-              <b-card
+            </b-card>
+            <b-card
                 title="Task management"
                 :img-src="task_app_image"
                 img-alt="Image"
                 img-top
                 tag="article"
                 style="max-width: 20rem;"
-                class="mb-2"
-              >
+                class="mb-2">
                 <b-card-text>
                   Keep track of your teams task effectively.
                 </b-card-text>
-
                 <b-button variant="primary">+ Info</b-button>
-              </b-card>
-
-              <b-card
+            </b-card>
+            <b-card
                 title="Employee registery"
                 :img-src="employee_info_image"
                 img-alt="Image"
                 img-top
                 tag="article"
                 style="max-width: 20rem;"
-                class="mb-2"
-              >
+                class="mb-2">
                 <b-card-text>
                   Manage all the information of your team.
                 </b-card-text>
-
                 <b-button variant="primary">+ Info</b-button>
-              </b-card>
-
-
+            </b-card>
         </div>
     </div>
 </template>

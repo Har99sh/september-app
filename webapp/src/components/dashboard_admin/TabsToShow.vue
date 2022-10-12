@@ -5,6 +5,7 @@
         <AdminTasksView v-if="active_tab == 'team-tasks'"/>
         <TaskList v-if="active_tab == 'my-tasks'"/>
         <MyInfo v-if="active_tab == 'my-info'"/>
+        <AllEmployees v-if="active_tab=='see-employees'"/>
     </div>
 </template>
 
@@ -15,10 +16,11 @@ import AdminTasksView from "../task_app/AdminTasksView.vue";
 import CreateTask from "../task_app/CreateTask.vue";
 import MyInfo from '../common/MyInfo.vue'
 import EmployeeRegisterForm from "../forms/EmployeeRegisterForm.vue";
+import AllEmployees from './AllEmployees.vue'
 
 export default {
     name: "TabsToShow",
-    components: {EmployeeRegisterForm, CreateTask, AdminTasksView, TaskList, MyInfo},
+    components: {EmployeeRegisterForm, CreateTask, AdminTasksView, TaskList, MyInfo, AllEmployees},
     props: ['active_tab'],
 }
 </script>

@@ -1,44 +1,69 @@
 <template lang="">
-<div>
-   <b-button id="show-btn" @click="showModal">Open Modal</b-button>
-    <b-button id="toggle-btn" @click="toggleModal">Toggle Modal</b-button>
-
-    <b-modal ref="my-modal" hide-footer title="Using Component Methods">
-      <div class="d-block text-center">
-        <h3>Hello From My Modal!</h3>
-      </div>
-      <b-button class="mt-3" variant="outline-danger" block @click="hideModal">Close Me</b-button>
-      <b-button class="mt-2" variant="outline-warning" block @click="toggleModal">Toggle Me</b-button>
-    </b-modal>
-</div>
+    <div class="container py-5 task-table">
+        <table class="table mb-0 ">
+            <thead>
+                <tr>
+                    <th scope="col">Employee Name</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="fw-normal" v-for="employee in employee_list" :key="employee.id">
+                    <th>
+                        <span class="ms-2">{{employee.name + ' ' + employee.surname}}</span>
+                    </th>
+                    <td class="align-middle">
+                        <div>
+                            <b-button-toolbar key-nav aria-label="Toolbar with button groups">
+                                <b-button-group class="mx-1">
+                                    <b-button variant="primary"> Assign Task </b-button>
+                                    <b-button variant="danger">Delete </b-button>
+                                    <b-button  v-b-modal="'modal'+employee.id" >+</b-button>
+                                </b-button-group>
+                            </b-button-toolbar>
+                        </div>
+                    </td>
+                    <div>
+                    <b-modal :id="'modal'+employee.id" hide-backdrop hide-footer scrollable :title="employee.name + ' ' + employee.surname">
+                        <p class="my-4">
+                            {{employee.id}}
+                        </p>
+                         <!-- Using value -->
+                        <b-button v-b-toggle.task-list class="m-1">See tasks</b-button>
+                        <b-button v-b-toggle.shift-logs class="m-1">See tasks</b-button>
+                        <!-- Element to collapse -->
+                        <b-collapse id="task-list">
+                            <b-list-group>
+                                    <b-list-group-item v-for="task in employee_list.tasks" :key="task.id">Cras justo odio</b-list-group-item>
+                            </b-list-group>
+                        </b-collapse>
+                        <b-collapse id="shift-logs">
+                            <b-list-group>
+                                    <b-list-group-item v-for="log in employee_list.shifts_logs" :key="log.id">Cras justo odio</b-list-group-item>
+                            </b-list-group>
+                        </b-collapse>
+                    </b-modal>
+                </div>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </template>
 <script>
-import axios from 'axios';
+import { TaskStore } from '../../controller/store/task_api.store';
 export default {
     name:"AllEmployees",
     data() {
         return {
-            user_list:[],
+            employee_list:[],
+            taskStore: new TaskStore,
         }
     },
-    methods: {
-        get_all_employees() {
-            const path = "http://127.0.0.1:5000/users"
-            axios.get(path, )
-            .then(response => user_list = response)
-        },
-        showModal() {
-        this.$refs['my-modal'].show()
-      },
-      hideModal() {
-        this.$refs['my-modal'].hide()
-      },
-      toggleModal() {
-        // We pass the ID of the button that we want to return focus to
-        // when the modal has hidden
-        this.$refs['my-modal'].toggle('#toggle-btn')
-      }
-    }
+    mounted() {
+        this.taskStore.getEmployeeList();
+        this.employee_list = this.taskStore.employee_list;
+        console.log(this.employee_list)
+    },
 }
 </script>
 <style lang="">

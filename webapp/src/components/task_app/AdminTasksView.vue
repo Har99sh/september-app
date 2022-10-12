@@ -18,7 +18,7 @@
                         <span>{{task.title}}</span>
                     </td>
                     <td class="align-middle">
-                        <b-button  :v-b-modal="'modal'+task.id" >+</b-button>
+                        <b-button  v-b-modal="'modal'+task.id" >+</b-button>
                     </td>
                     <td class="align-middle">
                         <div>
