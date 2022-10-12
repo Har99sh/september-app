@@ -8,34 +8,33 @@
                   <p class="fw-bold mb-0 fs-5">Register Employee</p>
                </div>
                <div class="modal-body p-4 pt-2s">
-                  <form class="">
+                  <b-form autocomplete="off">
                      <div class="form-floating mb-3 ">
-                        <input type="Name" class="form-control rounded-10" placeholder="Name" v-model="name" id="firstname">
+                        <b-form-input type="text" class="form-control rounded-10" v-model="name" id="firstname"></b-form-input>
                         <label for="firstname">Name</label>
                      </div>
                      <div class="form-floating mb-3">
-                        <input type="Lastname" class="form-control rounded-3" v-model="surname" id="surname" placeholder="Last Name">
+                        <b-form-input type="text" class="form-control rounded-3" v-model="surname" id="surname"></b-form-input>
                         <label for="surname">Last name</label>
                      </div>                    
                       <div class="form-floating mb-3">
-                        <input type="ID" class="form-control rounded-3" v-model="dni" id="dni" placeholder="X------">
-                        <label for="surname">DNI</label>
+                        <b-form-input type="text" class="form-control rounded-3" v-model="dni" id="dni" ></b-form-input>
+                        <label for="dni">DNI</label>
                      </div>
                      <div class="form-floating mb-3">
-                        <input type="E-mail" class="form-control rounded-3" id="email"
-                           placeholder="name@example.com">
+                        <b-form-input type="email" class="form-control rounded-3" id="email"
+                               placeholder="name@example.com" autocomplete="off" v-model="email" ></b-form-input>
                         <label for="email">E-mail</label>
                      </div>
                      <div class="form-floating mb-3">
-                        <input type="password" class="form-control rounded-3" id="password" v-model="password" placeholder="***********">
-
+                        <b-form-input type="password" class="form-control rounded-3" id="password" v-model="password" placeholder="***********" autocomplete="off"></b-form-input>
                         <label for="password">Password</label>
                      </div>
                       <b-form-checkbox v-model="is_admin" >Admin</b-form-checkbox>
                      <div class=" btn-toolbar d-flex justify-content-evenly">
-                        <button class="log btn btn-lg rounded-3 btn-md botonDeSubmit" type="submit" @click="submit">Submit</button>
+                        <b-button class="log btn btn-lg rounded-3 btn-md botonDeSubmit" @click="register">Submit</b-button>
                      </div>
-                  </form>
+                  </b-form>
                </div>
             </div>
          </div>
@@ -44,40 +43,40 @@
     </div>
 </template>
 <script>
-import axios from "axios";
+import { useAdminStore } from '../../controller/store/admin.store';
 export default {
    data() {
       return  {
          user_data :{
-            name: "",
-            surname: "",
-            dni:"",
-            email: "",
-            password:"",
-            is_admin: null,
-            company_id:"",
+            name: "Name",
+            surname: "Surname",
+            dni:"ID",
+            email: "employee@email.com",
+            password:"*****",
+            is_admin: false,
          }
       }
    },
   methods: {
-    submit: function () {
-      const path = "http://127.0.0.1:5000/register";
-      axios
-        .post(path, {
-            name: this.name,
+     register() {
+      console.log("componnet clco")
+      let data =  {
+         name: this.name,
             surname: this.surname,
-            email: this.email,
-            password: this.password,
-            is_admin: this.is_admin,
-            company_id:this.company_id,
-            dni: this.dni
-        })
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+               email: this.email,
+               password: this.password,
+               is_admin: this.is_admin || false,
+               dni: this.dni
+         };
+         console.log(data)
+         let store  = useAdminStore()
+         console.log(store)
+         store.register(data)
+      // console.log(data)
+      // await this.adminStore.registerEmployee(data);
+      // console.log("hello")
+
+      // this
     },
   },
 };

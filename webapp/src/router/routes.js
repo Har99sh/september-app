@@ -12,8 +12,6 @@ import LoginUser from '../components/forms/LoginUser.vue'
 
 
 /*Task app */
-import TaskList from '../components/task_app/TaskList.vue'
-import CreateTask from '../components/task_app/CreateTask.vue'
 import AdminTasksView from '../components/task_app/AdminTasksView.vue'
 
 /*Dashboard user */
@@ -43,17 +41,6 @@ const routes = [
         name:'LoginUser',
         component: LoginUser,
     },
-    /**Task app routes*/
-    //{
-    //     path:'/tasks',
-    //     name:'TaskList',
-    //     component: TaskList,
-    // },
-    // {
-    //     path:'/tasks/create',
-    //     name:'CreateTask',
-    //     component: CreateTask,
-    // },
     {
         path: '/admin/tasks',
         name: 'AdminTasksView',
@@ -69,12 +56,7 @@ const routes = [
         path: '/dashboard-admin',
         name: 'AdminDashboard',
         component: AdminDashboard,
-        children: [
-            { path: '/tasks/create', component: CreateTask},
-            { path: '/tasks', component: TaskList},
-          ],
     },
-
 ]
 const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),

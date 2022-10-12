@@ -32,6 +32,7 @@ export const TaskStore = defineStore({
             this.api.get('tasks/mine/' + this.user_id)
                 .then((response) => {
                     this.task_list = response.data;
+                    this.undone_task_list = this.task_list.filter((task) => task.is_completed == true);
                 })
                 .catch(error => console.log(error))  
         },
@@ -44,8 +45,10 @@ export const TaskStore = defineStore({
             if (this.api == null) {
                 this.initialise();
             }
-            this.api.put('tasks/done/'+task_id)
-            .then(res => console.log(res))
+            this.api.post('tasks/done', {"id": task_id})
+            .then(() => {
+                this.undone_task_list = this.task_list.filter((task) => task.is_completed == false);
+            })
             .catch(err => console.log(err))
             .finally(()=> console.log("done or not done"))
         },
@@ -72,9 +75,13 @@ export const TaskStore = defineStore({
         getEmployeeList() {
             if (this.user_id == null)
                 this.initialise();
+
             this.api.get('/employee/'+this.company_id)
-            .then(response => this.employee_list = response.data)
-            .catch(error => console.log(error))
+                .then(response => {
+                    this.employee_list = response.data
+                    console.log(response)
+                })
+                .catch(error => console.log(error))
         }
     }
 })

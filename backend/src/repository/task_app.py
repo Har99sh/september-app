@@ -122,7 +122,6 @@ class TasksRepository:
             emp_info = employee.no_id_json()
             task_info = task.to_JSON()
             task_info.update(emp_info)
-            print(task_info)
             return task_info
         else:
             print(task.to_JSON())

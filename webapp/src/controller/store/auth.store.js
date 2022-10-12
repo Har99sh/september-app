@@ -18,19 +18,16 @@ export const useAuthStore = defineStore({
                 .then((response) => {
                     console.log(response)
                     let user = response.data;
-                    let dashboard = "";
                     this.user = user;
                     localStorage.setItem('j4w_user', JSON.stringify(this.user));
                     let token_data = jwtDecode(this.user.token)
                     this.is_admin = token_data.isAdmin;
-                    dashboard = token_data.isAdmin ? "/dashboard-admin" : "/dashboard-user"
-                    //Go to url after login
-                    if (dashboard) {
-                        router.push(this.returnUrl || {path: dashboard})               
-                    } else {
-                        console.log(dashboard, "error")
-                        console.log(response.data)
-                    }
+                    console.log(this.is_admin)
+                    if (token_data.isAdmin != 'False')
+                        router.push({path : '/dashboard-admin'})   
+                    else 
+                        router.push({path : '/dashboard-user'})   
+                            
                 })
                 .catch(err => console.log(err))
         },

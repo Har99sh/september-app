@@ -62,9 +62,7 @@ def homepage():
 
 @app.post('/register')
 def create_user():
-    print("ejecutando register")
     new_user = request.get_json()
-    print(new_user)
     name = new_user['name']
     surname = new_user['surname']
     email = new_user['email']
@@ -102,7 +100,7 @@ def login():
         access_token = create_access_token(identity=userFromDb.id, additional_claims=additional_claims)
         return make_response(jsonify({ "token": access_token, "user_id": userFromDb.id }), 200)
 
-    return make_response("Erro")
+    return make_response("Error")
  #------------------------------------------------------------------------------------   
     # user= request.get_json()
     # email = user['email']
