@@ -68,7 +68,7 @@ export default {
     }
 }
 </script>
-<style>
+<style scoped>
 
 .modal-header {
   background-color: rgba(120, 166, 200, 1);

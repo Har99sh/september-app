@@ -30,5 +30,7 @@ export default {
     .main-body {
         display: flex;
         flex-direction: row;
+        width: 100vw;
+        max-height: 100vh;
     }
 </style>

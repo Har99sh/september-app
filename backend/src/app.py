@@ -34,8 +34,10 @@ from config import config
 app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['JWT_SECRET_KEY'] = config["JWT_KEY"]
+app.config["JWT_AUTHMAXAGE"] = 86400
 
 CORS(app)
+
 
 login_manager = LoginManager(app)
 jwt = JWTManager(app)
@@ -130,7 +132,6 @@ def login():
 @app.post('/register-company')
 def create_company():
     new_company = request.get_json()
-    print(new_company)
     name = new_company['name']
     cif = new_company['cif']
     email = new_company['email']
@@ -141,13 +142,11 @@ def create_company():
     company_to_add = Company(str(companyId), name, cif, email, telephone)
     #Check if account exists 
     account_exist = CompanyRepository().get_by_email(email)
-    print(account_exist)
     if account_exist:
-        return jsonify("company email already exist")
+        return make_response("Company email already exist", status=403)
     else:
         CompanyRepository().add(company_to_add)
-        print("company added correctly")
-        return jsonify("company added correctly")
+        return make_response("Company added correctly", status=200)
 
 
 def page_not_found(error):

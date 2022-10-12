@@ -10,6 +10,7 @@ export const useAuthStore = defineStore({
     state: () => ({
         user: JSON.parse(localStorage.getItem('j4w_user')),
         returnUrl: null,
+        is_admin: null
     }),
     actions: {
         login(user) {
@@ -20,6 +21,7 @@ export const useAuthStore = defineStore({
                     this.user = user;
                     localStorage.setItem('j4w_user', JSON.stringify(this.user));
                     let token_data = jwtDecode(this.user.token)
+                    this.is_admin = token_data.isAdmin;
                     dashboard = token_data.isAdmin ? "/dashboard-admin" : "/dashboard-user"
                     //Go to url after login
                     router.push(this.returnUrl || {path: dashboard})               

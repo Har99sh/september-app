@@ -7,7 +7,6 @@
                 <div class="modal-content rounded-4 shadow" id="contenidoDelLogin">
                     <div class="modal-header p-3 pb-3 border-bottom-0">
                        <p class="fw-bold mb-0 fs-5">New Task</p>
-                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body p-4 pt-2s">
                     <form class="">

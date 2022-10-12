@@ -27,6 +27,18 @@ def get_my_tasks(employee_id):
     except Exception as e:
         return make_response(e.__str__(), 400)
     
+@tasks.get('/company/<id>')
+@jwt_required()
+def get_company_tasks(id):
+    claims= get_jwt()
+    if claims["isAdmin"]:
+        try:
+            task_list = task_repository.get_company_tasks(id)
+            return make_response(task_list, 200)
+        except Exception as e:
+            return make_response(e.__str__(), 400)
+    
+    
 @tasks.get('/<id>')
 @jwt_required()
 def get_one_task(id):

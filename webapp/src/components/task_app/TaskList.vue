@@ -1,34 +1,68 @@
 <template>
-    <div class="all-tasks-container" v-if="task_list.length !== 0" >
-        <div class="d-flex justify-content-around w-50">
+    <div>   
+        <div class="d-flex justify-content-around w-100">
             <b-button variant="info" @click="filter_task('all')">All</b-button>
             <b-button variant="success" @click="filter_task('done')">Done</b-button>
-            <b-button variant="primary" @click="filter_task('todo')">To Do</b-button>   
-            <label for="sort_by">Sort By</label>
-            <b-form-select @input="sort_task" id="sort_by" class="w-50">
-                <b-form-select-option  value="due_date"> Due Date </b-form-select-option>
-            </b-form-select>        
+            <b-button variant="primary" @click="filter_task('todo')">To Do</b-button>       
         </div>
-        <div class="card w-75" v-for="task in task_list"  :key="task.id" >
-            <div class="card-body" :id="task.id">
-                <h5 class="card-title">{{task.title}}</h5>
-                <p class="card-text" >Due on {{task.due_date}}</p>
-                <b-collapse :id="'collapse'+task.id" class="mt-2">
-                    <b-card>
-                        <p class="card-text">{{task.description}}</p>
-                    </b-card>
-                </b-collapse>
-                <div class="task-actions">
-                    <b-button v-b-toggle="'collapse'+task.id" class="m-1">Description</b-button>
-                    <b-button class="m-1" 
-                              :variant="done_style(task.is_completed)" 
-                              @click="markAsDone(task.id)"
-                              :disabled="task.is_completed">
-                            Mark As Done 
-                    </b-button>
-                </div>
-            </div>
-        </div>
+        <div class="container py-5 task-table" v-if="task_list.length !== 0" >
+            <table class="table mb-0 ">
+                <thead>
+                    <tr>
+                        <th scope="col">Task</th>
+                        <th scope="col">Due on</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="fw-normal" v-for="task in task_list" :key="task.id">
+                        <th>
+                            <span class="ms-2">{{task.title}}</span>
+                        </th>                   
+                        <td>
+                            <span class="ms-2">{{task.due_date.slice(0, -13)}}</span>
+                        </td>
+                        <td class="align-middle">
+                            <b-button  v-b-modal="'modal'+task.id" >+</b-button>
+                        </td>
+                        <td class="align-middle">
+                            <div>
+                                <b-button-toolbar key-nav aria-label="Toolbar with button groups">
+                                    <b-button-group class="mx-1">
+                                    <b-button variant="danger">Comment</b-button>
+                                    <b-button :variant="done_style(task.is_completed)" 
+                                        @click="markAsDone(task.id)"
+                                        :disabled="task.is_completed">
+                                        Done
+                                    </b-button>
+                                    </b-button-group>
+                                </b-button-toolbar>
+                            </div>
+                        </td>
+                        <div>
+                        <b-modal :id="'modal'+task.id" hide-backdrop hide-footer scrollable :title="task.title">
+                            <p class="my-4">
+                                <strong> Due on {{task.due_date.slice(0, -13)}}</strong>
+                            </p>
+                            <p class="my-4">
+                                {{task.description}}
+                            </p>
+                            <b-button-toolbar key-nav aria-label="Toolbar with button groups">
+                                <b-button-group class="d-flex justify-content-evenly">
+                                <b-button variant="outline-danger">Comment</b-button>
+                                <b-button :variant="done_style(task.is_completed)" 
+                                        @click="markAsDone(task.id)"
+                                        :disabled="task.is_completed">
+                                        Done
+                                </b-button>
+                                </b-button-group>
+                            </b-button-toolbar>
+                        </b-modal>
+                    </div>
+                    </tr>
+                </tbody>
+            </table>
     </div>
     <!--Show this if there are no tasks in the database-->
     <div v-else>
@@ -40,9 +74,10 @@
             title="You do not have any tasks at the moment">
         </b-card>
     </div>
+</div>
 </template>
 <script>
-import axios from 'axios';
+
 import {TaskStore} from '../../controller/store/task_api.store'
 export default {
     name : 'TaskList',
@@ -56,20 +91,12 @@ export default {
             show_description: false,
             description_text: "DESCRIPTION",
             mark_as_done:"",
-            taskStore: TaskStore(),
+            taskStore: new TaskStore,
         }
     },
     methods: {
-       getTasks() {
-            this.task_list = this.taskStore.getMyTasks();
-        },
         markAsDone(id) {
-            //this.getTaskId();
-            console.log(id)
-            const path = this.axios_base_path + 'done/' + id;
-            axios.put(path)
-            .then(response => console.log(response))
-            .catch(error => console.log(error))
+            this.taskStore.markAsDone(id)
         },
         done_style(done){
             if (done) {
@@ -94,18 +121,18 @@ export default {
             }
         }
     },
-    beforeMount() {
-        this.getTasks();
+    mounted() {
+        this.taskStore.getMyTasks();
+        this.task_list = this.taskStore.task_list;
     }
 }
 </script>
 
-<style scoped>
+<style>
 .all-tasks-container {
     display: flex;
-    justify-content: center;
-    align-content: center;
     flex-direction: column;
+    justify-content: center;
     row-gap: 10px;
     width: 100%;
 }
