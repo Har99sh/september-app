@@ -16,6 +16,7 @@ export const useAuthStore = defineStore({
         login(user) {
             axios.post(baseUrl + 'login', user)
                 .then((response) => {
+                    console.log(response)
                     let user = response.data;
                     let dashboard = "";
                     this.user = user;
@@ -24,7 +25,12 @@ export const useAuthStore = defineStore({
                     this.is_admin = token_data.isAdmin;
                     dashboard = token_data.isAdmin ? "/dashboard-admin" : "/dashboard-user"
                     //Go to url after login
-                    router.push(this.returnUrl || {path: dashboard})               
+                    if (dashboard) {
+                        router.push(this.returnUrl || {path: dashboard})               
+                    } else {
+                        console.log(dashboard, "error")
+                        console.log(response.data)
+                    }
                 })
                 .catch(err => console.log(err))
         },

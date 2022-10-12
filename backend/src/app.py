@@ -103,6 +103,7 @@ def login():
         access_token = create_access_token(identity=userFromDb.id, additional_claims=additional_claims)
         return make_response(jsonify({ "token": access_token, "user_id": userFromDb.id }), 200)
 
+    return make_response("Erro")
  #------------------------------------------------------------------------------------   
     # user= request.get_json()
     # email = user['email']

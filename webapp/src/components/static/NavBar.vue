@@ -28,10 +28,6 @@
                   <div class="modal-header modal-dialog-centered">
                      <h1 class="modal-dialog modal-dialog-centered">{{running_time}}</h1>
                   </div>
-                  <div class="modal-body display-1 text-tipe" id="stopwatch" >
-                     {{runningTime}}
-                  </div>
-
                   <b-button type="button" v-if="!is_running" class="btn btn-primary paused boton-color" id="play-pause" @click="startTimer">
                      Start Timer
                   </b-button>

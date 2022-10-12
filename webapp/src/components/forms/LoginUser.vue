@@ -8,42 +8,12 @@
       placeholder="email@sm.com"
       v-model="email"
     ></b-form-input>
-
     <label class="sr-only" for="inline-form-input-username">Password</label>
     <b-input-group prepend="*" class="mb-2 mr-sm-2 mb-sm-0">
-      <b-form-input type="password" id="inline-form-input-username" placeholder="Username"></b-form-input>
+      <b-form-input v-model="password" type="password" id="inline-form-input-password" placeholder="****"></b-form-input>
     </b-input-group>
-    <b-form-checkbox class="mb-2 mr-sm-2 mb-sm-0">Remember me</b-form-checkbox>
     <b-button type="submit"  variant="primary" @click="authenticate">Login</b-button>
   </b-form>
-    <main>
-      <div class="modal modal-signin position-static d-block py-5" tabindex="-1" role="dialog" id="modalSignin">
-         <div class="modal-dialog" role="document">
-           <div class="modal-content rounded-4 shadow" id="contenidoDelLogin">
-             <div class="modal-header p-3 pb-3 border-bottom-0">
-               <p class="fw-bold mb-0 fs-5">Sign in to your account</p>
-               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-             </div>
-             <div class="modal-body p-4 pt-2s">
-               <form class="">
-                 <div class="form-floating mb-3">
-                   <input type="Name" class="form-control rounded-10" id="floatingInput" placeholder="email" >
-                   <label for="floatingInput">User</label>
-                 </div>
-                 <div class="form-floating mb-3">
-                     <input type="password" class="form-control rounded-10" id="floatingPassword" placeholder="Password" v-model="password">
-                     <label for="floatingPassword">Password</label>
-                   </div>
-                 <div class="btn-toolbar d-flex justify-content-evenly">
-                     <div type="submit" class="log  btn btn-lg rounded-3 btn-md botonDeLogin" id="botonDeLogin" @submit="authenticate">Login </div>
-                     <button class="btn btn-lg rounded-3 btn-md" id="logCancel" type="submit">Cancel</button>
-                 </div>
-               </form>
-             </div>
-           </div>
-         </div>
-     </div>
-    </main>
   </div>
 </template>
 <script>
@@ -63,6 +33,7 @@ export default {
           "email": this.email,
           "password": this.password
         }
+        console.log(login_data)
         authStore.login(login_data);
       }
     }

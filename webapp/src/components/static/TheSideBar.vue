@@ -13,7 +13,7 @@
                 <b-button @click="changeTab('see-employees')" class="nav-link text-white">
                     See Employees
                 </b-button>
-                <b-button @click="changeTab('see-employees')" class="nav-link text-white">
+                <b-button @click="changeTab('register-employee')" class="nav-link text-white">
                     Add Employee
                 </b-button>
             </li>
