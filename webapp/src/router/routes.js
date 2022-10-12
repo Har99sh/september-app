@@ -61,9 +61,9 @@ const routes = [
     },
     /**User dashboard */
     {
-        path: '/dashboard',
+        path: '/dashboard-user',
         name: 'UserDashboard',
-        component: UserDashboard
+        component: UserDashboard,        
     },
     {
         path: '/dashboard-admin',
@@ -83,7 +83,7 @@ const router = createRouter({
 
 router.beforeEach(async (to) => {
     // redirect to login page if not logged in and trying to access a restricted page
-    const publicPages = ['/login', '/', '/register-company'];
+    const publicPages = ['/login', '/', '/register-company', '/dashboard-user'];
     const authRequired = !publicPages.includes(to.path);
     const auth = useAuthStore();
     if (authRequired && !auth.user) {

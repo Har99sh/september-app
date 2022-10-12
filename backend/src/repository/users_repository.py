@@ -1,8 +1,8 @@
 from models.users import Users
 from database.db import get_connection
 from psycopg2 import sql,extras
-from task_app import TasksRepository
-from time_tracker_app import TimeTrackerRepository
+from repository.task_app import TasksRepository
+from repository.time_tracker_app import TimeTrackerRepository
 
 class UserRepository:
 

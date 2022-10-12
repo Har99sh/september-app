@@ -20,7 +20,7 @@ export default {
 .footerConteinerTotal {
     position: fixed;
     bottom: 0; 
-    width: 100%;
+    width: 100%;   
     display: flex;
     flex-direction: column;
 }
