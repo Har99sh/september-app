@@ -93,10 +93,9 @@ def login():
     # Query your database for username and password
     user_repository = UserRepository()
     userFromDb = user_repository.getUserByEmail(email)
-    passwordFromDb = userFromDb.password
     if userFromDb is None:
         return jsonify({"msg": "Incorrect username or password"})
-    
+    passwordFromDb = userFromDb.password
     # create a new token with the user id inside
     if check_password_hash(passwordFromDb, password): 
         additional_claims = {"isAdmin": f"{userFromDb.is_admin}", "companyID": f"{userFromDb.company_id}"}
