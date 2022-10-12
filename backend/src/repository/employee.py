@@ -1,4 +1,4 @@
-from models.employee import Employee
+from models.employee import Employee, EmployeeInfo
 from database.db import get_connection
 from psycopg2 import sql,extras
 
@@ -21,6 +21,11 @@ class EmployeeRepository:
         if len(employee_list) == 0:
             return "no emps"
         return employee_list
+
+    def get_employee_info(self, employee_id):
+        cursor = self._dbconection.cursor(cursor_factory=extras.RealDictCursor)
+        cursor.execute('SELECT id, name, surname, email, company_id, is_admin FROM users WHERE id = %s', (id,))
+        pass
 
     def __compound_employee(self, row):
         employee = Employee(row["id"],row['name'],row["surname"])

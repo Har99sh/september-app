@@ -14,3 +14,7 @@ def get_employees(company_id):
         return make_response(list, 200)
     except Exception as e:
         return make_response(e.__str__(), 400)
+    
+@employee.get('/info')
+def get_employee_info():
+    return 

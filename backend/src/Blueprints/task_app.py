@@ -85,11 +85,15 @@ def create():
     except Exception as e:
         return make_response(e.__str__(), 400)
     
-@tasks.put('/done/≤id>')
+@tasks.post('/done')
 @jwt_required()
 def mark_as_done():
     try:
-        task_repository.update('done', id)
+        task = request.get_json()
+        print(task)
+        id = task["id"]
+        print(id)
+        task_repository.done(id)
         return make_response('Task is done', 200)
     except Exception as e:
         return make_response(e.__str__(), 400)

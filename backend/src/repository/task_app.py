@@ -79,18 +79,23 @@ class TasksRepository:
         self.dbconnection.commit()
         cursor.close()
         
-    def update(self, type, id):
+    def update(self, id):
         cursor = self.dbconnection.cursor()
-        if type == 'done':
-            cursor.execute('UPDATE task_app SET is_completed=True WHERE id = %s;', (id))
-            self.dbconnection.commit()
-            cursor.close()
-        elif type == 'content':
-            pass
+        cursor.execute('UPDATE task_app SET is_completed=True WHERE id = %s;', (id,))
+        self.dbconnection.commit()
+        cursor.close()
+
+        
+    def done(self, id):
+        cursor = self.dbconnection.cursor()
+        cursor.execute('UPDATE task_app SET is_completed = true WHERE id = %s;', (id,))
+        self.dbconnection.commit()
+        cursor.close()
+
         
     def delete(self, id):
         cursor = self.dbconnection.cursor()
-        cursor.execute('delete from task_app where id = %s', (id,))
+        cursor.execute('delete from task_app where id = %s;', (id,))
         self.dbconnection.commit()
         cursor.close()
         
