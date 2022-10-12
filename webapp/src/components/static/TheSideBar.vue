@@ -49,6 +49,5 @@ export default {
 <style scoped>
     .sidebar-admin {
         height: 90vh;
-        position: sticky;
     }
 </style>
