@@ -10,7 +10,10 @@ export const useAuthStore = defineStore({
     state: () => ({
         user: JSON.parse(localStorage.getItem('j4w_user')),
         returnUrl: null,
-        is_admin: null
+        is_admin: null,
+        is_logged: null,
+        log_in_error: null,
+        error_reason: null,
     }),
     actions: {
         login(user) {
@@ -21,23 +24,33 @@ export const useAuthStore = defineStore({
                     this.user = user;
                     localStorage.setItem('j4w_user', JSON.stringify(this.user));
                     let token_data = jwtDecode(this.user.token)
-                    this.is_admin = token_data.isAdmin;
-                    console.log(this.is_admin)
-                    if (token_data.isAdmin != 'False')
+                    this.is_logged = true;
+                    if (token_data.isAdmin != 'False') {
+                        this.is_admin = false;
                         router.push({path : '/dashboard-admin'})   
-                    else 
+                    } else 
                         router.push({path : '/dashboard-user'})   
-                            
                 })
-                .catch(err => console.log(err))
+                .catch((err)=> {
+                    this.log_in_error = true;
+                    this.error_reason= err.response.data
+                    router.push({path : '/login'})
+                })
         },
         logout() {
             this.user = null;
             localStorage.removeItem('j4w_user');
         },
         isLoggedIn() {
-            let loggedIn = localStorage.getItem('j4w_user')
-            return loggedIn == this.user ? true : false
+            let loggedIn = JSON.parse(localStorage.getItem('j4w_user'));
+            if (loggedIn != null) {
+                console.log(this.user.token)
+                console.log(loggedIn.token)
+                if (this.user.token == loggedIn.token && this.user != null) {
+                    console.log(true)
+                    return true
+                }
+            }
         }
     }
 });

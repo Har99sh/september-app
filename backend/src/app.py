@@ -1,6 +1,6 @@
 from email.header import Header
 import imp
-from flask import Flask, jsonify, request, make_response,  url_for, redirect, g, session
+from flask import Flask, jsonify, request, make_response,  url_for, redirect, g, session, Response
 from flask_login import LoginManager, login_user, current_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import JWTManager, create_access_token
@@ -78,10 +78,10 @@ def create_user():
     #Check if account exists 
     account_exist = UserRepository().get_by_email(email)
     if account_exist:
-        return make_response(status=409)
+        return Response("Account exists already", status=403)
     else:
         UserRepository().add(user_to_add)
-        return jsonify("user added correctly")
+        return make_response("User added correctly")
 
 @app.post('/login')
 def login():
@@ -92,15 +92,16 @@ def login():
     user_repository = UserRepository()
     userFromDb = user_repository.getUserByEmail(email)
     if userFromDb is None:
-        return jsonify({"msg": "Incorrect username or password"})
+        return Response("This account does not exist", status=404)
     passwordFromDb = userFromDb.password
     # create a new token with the user id inside
     if check_password_hash(passwordFromDb, password): 
         additional_claims = {"isAdmin": f"{userFromDb.is_admin}", "companyID": f"{userFromDb.company_id}"}
         access_token = create_access_token(identity=userFromDb.id, additional_claims=additional_claims)
         return make_response(jsonify({ "token": access_token, "user_id": userFromDb.id }), 200)
+    else: 
+        return Response("Incorrect password", status=401)
 
-    return make_response("Error")
  #------------------------------------------------------------------------------------   
     # user= request.get_json()
     # email = user['email']
@@ -141,10 +142,10 @@ def create_company():
     #Check if account exists 
     account_exist = CompanyRepository().get_by_email(email)
     if account_exist:
-        return make_response("Company email already exist", status=403)
+        return Response("Company email already exist", status=403)
     else:
         CompanyRepository().add(company_to_add)
-        return make_response("Company added correctly", status=200)
+        return Response("Company added correctly", status=200)
 
 
 def page_not_found(error):

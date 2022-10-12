@@ -3,7 +3,7 @@
        <div class="container-fluid">
           <router-link class="navbar-brand" to="/">J4W</router-link>
 
-          <div v-if="is_logged" class="d-flex" id="navbarTogglerDemo02">
+          <div v-if="!is_logged" class="d-flex" id="navbarTogglerDemo02">
              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                    <router-link class="nav-link active" to="/login">Login</router-link>
@@ -48,7 +48,7 @@ import { shiftStore } from '../../controller/store/shift_api.store';
 export default {
    data() {
       return{
-         authStore: new useAuthStore(),
+         authStore: useAuthStore(),
          total_time: null,
          running_time: 0,
          start_time: null,
@@ -60,12 +60,13 @@ export default {
    },
    computed: {
       is_logged() {
-         return this.authStore.isLoggedIn();
+         return this.authStore.is_logged;
       }
    },
    methods: {
       logout(){
          this.authStore.logout()
+         this.authStore.is_logged = false;
       },
       startTimer() {
          // Send post request to api /start-timer
