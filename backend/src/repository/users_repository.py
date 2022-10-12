@@ -1,10 +1,14 @@
 from models.users import Users
 from database.db import get_connection
 from psycopg2 import sql,extras
+from task_app import TasksRepository
+from time_tracker_app import TimeTrackerRepository
 
 class UserRepository:
 
     _dbconection = get_connection() 
+    _taskRepository = TasksRepository()
+    _timeTrackerRepository = TimeTrackerRepository()
 
     def get(self, id):
         cursor = self._dbconection.cursor(cursor_factory=extras.RealDictCursor)
@@ -64,6 +68,13 @@ class UserRepository:
                        ))
         self._dbconection.commit()
         cursor.close()
+
+    def get_user_details(self, id, day):
+         cursor = self._dbconection.cursor()
+         user = self.get(id)
+         task_list = self._taskRepository.get_my_tasks(id)
+         hour_logs = self._timeTrackerRepository.get_one_day_timetracker(id, day)
+        
 
     def __compound_user(self, row):
         if row is None:

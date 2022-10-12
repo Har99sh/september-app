@@ -1,8 +1,11 @@
 from flask import Blueprint, make_response
 from models.users import Users
 from database.db import get_connection
+from repository.users_repository import UserRepository
 
 users = Blueprint('users', __name__, url_prefix="/users")
+usersRepository = UserRepository()
+
 
 @users.get('/')
 def get_users():
@@ -22,6 +25,8 @@ def get_users():
     except Exception as ex:
         raise Exception(ex)
 
+
+
 @users.get('/<id>')
 def get_one_user(id):
     try:
@@ -39,4 +44,12 @@ def get_one_user(id):
         return one_user
     except Exception as ex:
         raise Exception(ex)
+
+
+@users.get('/<id>')
+def get_user_dashboard_deltails(id):
+    usersRepository.get_user_details(id)
+            
+        
+      
 

@@ -11,7 +11,7 @@ class Users(UserMixin):
         self.company_id = company_id
         self.dni = dni
         self.is_admin = is_admin
-
+       
     def to_JSON(self):
         return{
             'id': self.id,
@@ -21,7 +21,8 @@ class Users(UserMixin):
             'password': self.password, 
             'company_id' : self.company_id,
             'dni' : self.dni,
-            'is_admin' : self.is_admin 
+            'is_admin' : self.is_admin, 
+
         }
     
     def to_JSON_no_pass(self):
@@ -32,5 +33,6 @@ class Users(UserMixin):
             'email': self.email,
             'company_id' : self.company_id,
             'dni' : self.dni,
-            'is_admin' : self.is_admin 
+            'is_admin' : self.is_admin,
+
         }

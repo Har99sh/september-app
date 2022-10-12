@@ -53,7 +53,15 @@ class TimeTrackerRepository:
         self.dbconnection.commit()
         cursor.close()
             
-    
+    def get_one_day_timetracker(self, id, day):
+        cursor = self.dbconnection.cursor(cursor_factory=extras.RealDictCursor)
+        cursor.execute('Select * FROM shift_tracker WHERE employee_id = %s AND work_day = %s', (id, day,))
+        time_tracker = self.__compound_timeTracker(cursor.fetchone())
+        cursor.close()
+        return time_tracker
+
+
+
     def __compound_timeTracker(self, row):
         if row is None:
             return None
@@ -69,3 +77,5 @@ class TimeTrackerRepository:
         )
 
         return timeTracker.to_JSON()
+
+    
