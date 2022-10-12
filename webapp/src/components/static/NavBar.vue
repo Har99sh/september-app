@@ -44,6 +44,7 @@
 
 <script>
 import {useAuthStore} from '../../controller/store/auth.store';
+import { shiftStore } from '../../controller/store/shift_api.store';
 export default {
    data() {
       return{
@@ -54,6 +55,7 @@ export default {
          finish_time: null,
          is_running: false,
          time_interval: null,
+         shiftStore : new shiftStore
       }
    },
    computed: {
@@ -67,6 +69,7 @@ export default {
       },
       startTimer() {
          // Send post request to api /start-timer
+         this.shiftStore.startShift()
          this.is_running = true;
          this.start_time = Date.now() - this.running_time;
          this.time_interval = setInterval(()=> {
@@ -85,6 +88,7 @@ export default {
       },
       stopTimer(){
          //Send post request api to stop timer
+         this.shiftStore.endShift()
          this.is_running = false;
          this.running_time = 0;
          clearInterval(this.time_interval);
