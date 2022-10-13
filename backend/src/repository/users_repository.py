@@ -74,7 +74,7 @@ class UserRepository:
          user = self.get(id)
          task_list = self._taskRepository.get_my_tasks(id)
          hour_logs = self._timeTrackerRepository.get_one_day_timetracker(id, day)
-         return UserDashboardInfoDto(
+         user_dashboard_info = UserDashboardInfoDto(
              user.id,
              user.name,
              user.surname,
@@ -85,6 +85,7 @@ class UserRepository:
              task_list,
              hour_logs
          )
+         return user_dashboard_info.to_JSON
         
 
     def __compound_user(self, row):
