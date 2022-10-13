@@ -48,8 +48,8 @@ def get_one_user(id):
 
 @users.get('/<id>')
 def get_user_dashboard_deltails(id):
-    usersRepository.get_user_details(id)
-            
+    user_details = usersRepository.get_user_details(id)
+    return user_details        
         
       
 
