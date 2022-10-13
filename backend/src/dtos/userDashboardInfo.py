@@ -1,5 +1,5 @@
 
-Class UserDashboardInfoDto()
+class UserDashboardInfoDto():
 
     def __init__(self, id, name, surname, email, company_id, is_admin, contract_info, task_list, hour_logs) -> None:
         self.id = id
@@ -8,8 +8,8 @@ Class UserDashboardInfoDto()
         self.email = email
         self.company_id = company_id
         self.is_admin = is_admin
-        self.contract_info: dict=contract_info,
-        self.task_list = task_list,
+        self.contract_info: contract_info
+        self.task_list = task_list
         self.hour_logs = hour_logs
 
     def to_JSON(self):

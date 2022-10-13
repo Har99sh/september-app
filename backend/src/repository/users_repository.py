@@ -3,6 +3,7 @@ from database.db import get_connection
 from psycopg2 import sql,extras
 from repository.task_app import TasksRepository
 from repository.time_tracker_app import TimeTrackerRepository
+from dtos.userDashboardInfo import UserDashboardInfoDto
 
 class UserRepository:
 
@@ -70,10 +71,20 @@ class UserRepository:
         cursor.close()
 
     def get_user_details(self, id, day):
-         cursor = self._dbconection.cursor()
          user = self.get(id)
          task_list = self._taskRepository.get_my_tasks(id)
          hour_logs = self._timeTrackerRepository.get_one_day_timetracker(id, day)
+         return UserDashboardInfoDto(
+             user.id,
+             user.name,
+             user.surname,
+             user.email,
+             user.company_id,
+             user.is_admin,
+             None,
+             task_list,
+             hour_logs
+         )
         
 
     def __compound_user(self, row):
