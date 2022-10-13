@@ -51,10 +51,11 @@
                                     <b-button class="log btn btn-lg rounded-3 btn-md botonDeSubmit " type="submit" @click="submit">Login</b-button>
                                  </div>
 
-                                 <a class="small text-muted" href="#!">Forgot password?</a>
-                                 <a href="#!" class="small text-muted">Terms of use.</a>
-                                 <a href="#!" class="small text-muted">Privacy policy</a>
-                              
+                                 <div class="classTerms">
+                                    <div><a class="small text-muted" href="#!">Forgot password?</a></div>
+                                    <div><a href="#!" class="small text-muted">Terms of use.</a></div>
+                                    <div><a href="#!" class="small text-muted">Privacy policy</a></div>
+                                 </div>
                               </b-form>
                            </div>
                         </div>
@@ -114,6 +115,15 @@ export default {
 .botonDeSubmit {
   background-color: rgba(120, 166, 200, 1);
   color: rgb(0, 0, 0); 
+}
+
+.classTerms {
+   display: flex;
+   justify-content: space-between;
+}
+.classTerms a:link, a:visited, a:active a:focus a:hover {
+   text-decoration:none;
+    color: black;
 }
 </style>
 

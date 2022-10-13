@@ -37,12 +37,14 @@
                               </div>
 
                               <div class="pt-1 mb-4">
-                                      <b-button class="btn btn-dark btn-lg btn-block" type="submit" @click="authenticate">Login</b-button>
+                                      <b-button class="btn btn-dark btn-lg btn-block botonDeSubmit" type="submit" @click="authenticate">Login</b-button>
                               </div>
 
-                              <a class="small text-muted" href="#!">Forgot password?</a>
-                              <a href="#!" class="small text-muted">Terms of use.</a>
-                              <a href="#!" class="small text-muted">Privacy policy</a>
+                              <div class="classTerms">
+                                    <div><a class="small text-muted" href="#!">Forgot password?</a></div>
+                                    <div><a href="#!" class="small text-muted">Terms of use.</a></div>
+                                    <div><a href="#!" class="small text-muted">Privacy policy</a></div>
+                                 </div>
                               </b-form>
 
                           </div>
@@ -96,5 +98,17 @@ export default {
   background-color: rgba(120, 166, 200, 1);
   color: white;
 }
-    
+.botonDeSubmit {
+  background-color: rgba(120, 166, 200, 1);
+  color: rgb(0, 0, 0); 
+}
+.classTerms {
+   display: flex;
+   justify-content: space-between;
+}
+.classTerms a:link, a:visited, a:active a:focus a:hover {
+   text-decoration:none;
+    color: black;
+}
+
 </style>
