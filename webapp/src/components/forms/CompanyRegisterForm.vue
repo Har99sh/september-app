@@ -15,7 +15,7 @@
                           <div class="col-md-6 col-lg-7 d-flex align-items-center">
                           <div class="card-body p-4 p-lg-5 text-black">
                               <b-form>
-                                 
+
                               <div class="d-flex align-items-center mb-3 pb-1">
                                   <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
                                   <span class="h1 fw-bold mb-0">Just4Work</span>
@@ -29,7 +29,7 @@
                               </div>
 
                               <div class="form-outline mb-4">
-                                  <b-form-input class="form-control rounded-10" type="Lastname" id="floatingInput" placeholder="Last Name"></b-form-input>
+                                  <b-form-input class="form-control rounded-10" type="Lastname" id="floatingInput" placeholder="Cif"></b-form-input>
                                   <label class="form-label" for="floatingInput">Cif</label>
                               </div>
 
@@ -45,8 +45,8 @@
                               </div>
 
                               <div class="form-outline mb-4">
-                                  <b-form-input v-model="password" type="Mobile" class="form-control rounded-3" id="floatingInput" placeholder="Movile"></b-form-input>
-                                  <label class="form-label" for="floatingInput">Movile</label>
+                                  <b-form-input v-model="password" type="Mobile" class="form-control rounded-3" id="floatingInput" placeholder="Telephone"></b-form-input>
+                                  <label class="form-label" for="floatingInput">Telephone</label>
                               </div>
 
 
