@@ -39,6 +39,11 @@ export default {
     padding: 15px;
 }
 
+.footerLinks a:link, a:visited, a:active a:focus a:hover{
+    text-decoration:none;
+    color: black;
+}
+
 .footerCompanyInc {
     background-color:white;
     display: flex;
