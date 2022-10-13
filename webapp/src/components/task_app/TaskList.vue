@@ -96,17 +96,9 @@ export default {
     },
     methods: {
         markAsDone(id) {
-<<<<<<< Updated upstream
             this.taskStore.markAsDone(id);
             this.task_list = this.taskStore.undone_task_list;
             this.updateView();
-=======
-            console.log(id)
-            const path = this.axios_base_path + 'done/' + id;
-            axios.put(path)
-            .then(response => console.log(response))
-            .catch(error => console.log(error))
->>>>>>> Stashed changes
         },
         done_style(done){
             if (done) {

@@ -25,21 +25,21 @@ export const useAuthStore = defineStore({
                     localStorage.setItem('j4w_user', JSON.stringify(this.user));
                     let token_data = jwtDecode(this.user.token)
                     this.is_logged = true;
-                    if (token_data.isAdmin != 'False') {
-                        this.is_admin = false;
+                    if (token_data.isAdmin == 'True') {
+                        this.is_admin = true;
                         router.push({path : '/dashboard-admin'})   
                     } else 
                         router.push({path : '/dashboard-user'})   
                 })
                 .catch((err)=> {
                     this.log_in_error = true;
-                    this.error_reason= err.response.data
-                    router.push({path : '/login'})
+                    this.error_reason= err.response.data;
+                    router.push({path : '/login'});
                 })
         },
         logout() {
-            this.user = null;
             localStorage.removeItem('j4w_user');
+            this.user = null;
         },
         isLoggedIn() {
             let loggedIn = JSON.parse(localStorage.getItem('j4w_user'));

@@ -32,11 +32,11 @@ def get_one_user(id):
     try:
         connection = get_connection()
         with connection.cursor() as cursor:
-            cursor.execute("SELECT id, name, surname, email, company_id, dni, is_admin FROM users WHERE id = %s", (id,))
+            cursor.execute("SELECT id, name, surname, email, company_id, dni, is_admin, password FROM users WHERE id = %s", (id,))
             row = cursor.fetchone()
             one_user = None
             if row is not None:
-               one_user = Users(id=row[0], name=row[1], surname=row[2], email=row[3], company_id=row[4], dni=row[5], is_admin=row[6])
+               one_user = Users(id=row[0], name=row[1], surname=row[2], email=row[3], company_id=row[4], dni=row[5], is_admin=row[6], password=row[7])
                one_user = one_user.to_JSON()
             
         

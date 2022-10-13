@@ -6,8 +6,7 @@ export const shiftStore = defineStore({
     state: ()=> ({
         employee_id : null,
         api: null,
-    }),
-    
+    }),    
     actions: {
         initialise() {
             const store = useApiStore();
@@ -18,7 +17,7 @@ export const shiftStore = defineStore({
         },
         startShift() {
             if (this.api == null)
-            this.initialise();
+                this.initialise();
             this.api.post('time_tracker/start/'+this.employee_id)
         },
         endShift() {
@@ -30,7 +29,5 @@ export const shiftStore = defineStore({
             .catch(err => console.log(err))
             .finally(()=> console.log("ended or not ended"))
         }
-
     }
-
 })

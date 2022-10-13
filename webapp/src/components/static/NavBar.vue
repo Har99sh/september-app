@@ -89,7 +89,7 @@ export default {
       },
       stopTimer(){
          //Send post request api to stop timer
-         this.shiftStore.endShift()
+         this.shiftStore.endShift();
          this.is_running = false;
          this.running_time = 0;
          clearInterval(this.time_interval);

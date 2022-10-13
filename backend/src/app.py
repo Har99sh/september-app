@@ -26,6 +26,8 @@ from repository.company_repository import CompanyRepository
 #Employees
 from Blueprints.employees import employee
 
+from Blueprints.users_routes import users
+
 #Time Tracker
 from Blueprints.time_tracker_app import time_tracker
 
@@ -46,6 +48,7 @@ app.register_blueprint(tasks)
 app.register_blueprint(company)
 app.register_blueprint(employee)
 app.register_blueprint(time_tracker)
+app.register_blueprint(users)
 
 @login_manager.user_loader
 def load_user(id):
